@@ -124,36 +124,97 @@ addEventListener('DOMContentLoaded', () => {
         }
     }
     beginner.onclick = () => {
+        let rand = () => {
+            return Math.floor(Math.random() * 9 + 6);         
+        }
+        let pos1x = Math.floor(Math.random() * 9 + 6);
         for (let i = 6; i < 15; i++) {
-            button[i].style.display = 'block'
+            button[i].style.display = 'block';
+            button[i].disabled = true;
         }
         table[0].style.display = 'none';
         table[1].style.visibility = 'visible';
-        let pos = Math.floor(Math.random() * 10 + 6);
-        let first = () => { 
-            button[pos].innerHTML = 'X';
-            button[pos].innerHTML = 'X';
-            button[pos].style.fontSize = '50px';
-            button[pos].style.textAlign = 'center';
-            button[pos].style.color = 'black';
-            button[pos].disabled = 'true';
+        let first = () => {
+            button[pos1x].innerHTML = 'X';
+            button[pos1x].style.fontSize = '50px';
+            button[pos1x].style.textAlign = 'center';
+            button[pos1x].style.color = 'black';            
             if (window.matchMedia('(max-width: 1600px)').matches) {
-                button[pos].style.fontSize = '45px';
+                button[pos1x].style.fontSize = '45px';
+            }
+            for (let i = 6; i < 15; i++) {
+                if (i != pos1x) {
+                    button[i].disabled = false
+                }
             }
         }
         setTimeout(first, 1000);
-        for (let i = 6; i < 15; i++) {
-            button[i].onclick = () => {
-                button[i].innerHTML = 'O';
-                button[i].style.fontSize = '50px';
-                button[i].style.textAlign = 'center';
-                button[i].style.color = 'black';
-                for (let i = 6; i < 15; i++) {
-                    button[i].style.disabled = 'true'
-                }
+        for (let pos1o = 6; pos1o < 15; pos1o++) {
+            button[pos1o].onclick = () => {
+                button[pos1o].innerHTML = 'O';
+                button[pos1o].style.fontSize = '50px';
+                button[pos1o].style.textAlign = 'center';
+                button[pos1o].style.color = 'black';
                 if (window.matchMedia('(max-width: 1600px)').matches) {
-                    button[i].style.fontSize = '45px';
+                    button[pos1o].style.fontSize = '45px';
                 }
+                for (let i = 6; i < 15; i++) {
+                    button[i].disabled = true
+                }
+                let second = () => {
+                    let pos2x;
+                    while (pos2x < 14) {
+                        pos2x = rand();
+                    }
+                    console.log(pos2x)
+                    button[pos2x].innerHTML = 'X';
+                    button[pos2x].style.fontSize = '50px';
+                    button[pos2x].style.textAlign = 'center';
+                    button[pos2x].style.color = 'black';           
+                    if (window.matchMedia('(max-width: 1600px)').matches) {
+                        button[pos2x].style.fontSize = '45px';
+                    }
+                    for (let i = 6; i < 15; i++) {
+                        if (button[i].innerHTML != 'X' && button[i].innerHTML != 'O') {
+                            button[i].disabled = false;
+                        }                   
+                    }
+                }
+                setTimeout(second, 1000)
+                for (let pos2o = 6; pos2o < 15; pos2o++) {
+                    button[pos2o].onclick = () => {
+                        button[pos2o].innerHTML = 'O';
+                        button[pos2o].style.fontSize = '50px';
+                        button[pos2o].style.textAlign = 'center';
+                        button[pos2o].style.color = 'black';
+                        if (window.matchMedia('(max-width: 1600px)').matches) {
+                            button[pos1o].style.fontSize = '45px';
+                        }
+                        for (let i = 6; i < 15; i++) {
+                            button[i].disabled = true;
+                        }
+                    }
+                }
+                let third = () => {
+                    let int = setInterval(rand, 0);
+                    let pos3x = rand() 
+                    if (button[pos3x].innerHTML != 'X' && button[pos3x].innerHTML != 'O') {
+                        clearInterval(int);
+                    }
+                    button[pos3x].innerHTML = 'X';
+                    button[pos3x].style.fontSize = '50px';
+                    button[pos3x].style.textAlign = 'center';
+                    button[pos3x].style.color = 'black';           
+                    if (window.matchMedia('(max-width: 1600px)').matches) {
+                        button[pos3x].style.fontSize = '45px';
+                    }
+                    for (let i = 6; i < 15; i++) {
+                        if (button[i].innerHTML != 'X' && button[i].innerHTML != 'O') {
+                            button[i].disabled = false;
+                        }                   
+                    }
+                }
+                setTimeout(third, 1000)
             }
         }
     }
