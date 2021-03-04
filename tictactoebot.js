@@ -127,7 +127,7 @@ addEventListener('DOMContentLoaded', () => {
         let rand = () => {
             return Math.floor(Math.random() * 9 + 6);         
         }
-        let pos1x = Math.floor(Math.random() * 9 + 6);
+        let pos1x = rand();
         for (let i = 6; i < 15; i++) {
             button[i].style.display = 'block';
             button[i].disabled = true;
@@ -162,11 +162,10 @@ addEventListener('DOMContentLoaded', () => {
                     button[i].disabled = true
                 }
                 let second = () => {
-                    let pos2x;
-                    while (pos2x < 14) {
-                        pos2x = rand();
+                    let pos2x = rand();
+                    while (pos2x == pos1x || pos2x == pos1o) {
+                        pos2x = rand()
                     }
-                    console.log(pos2x)
                     button[pos2x].innerHTML = 'X';
                     button[pos2x].style.fontSize = '50px';
                     button[pos2x].style.textAlign = 'center';
@@ -179,42 +178,107 @@ addEventListener('DOMContentLoaded', () => {
                             button[i].disabled = false;
                         }                   
                     }
+                    for (let pos2o = 6; pos2o < 15; pos2o++) {
+                        button[pos2o].onclick = () => {
+                            button[pos2o].innerHTML = 'O';
+                            button[pos2o].style.fontSize = '50px';
+                            button[pos2o].style.textAlign = 'center';
+                            button[pos2o].style.color = 'black';
+                            if (window.matchMedia('(max-width: 1600px)').matches) {
+                                button[pos2o].style.fontSize = '45px';
+                            }
+                            for (let i = 6; i < 15; i++) {
+                                button[i].disabled = true;
+                            }
+                            let third = () => {
+                                let pos3x = rand();
+                                while (pos3x == pos1x || pos3x == pos1o || pos3x == pos2x || pos3x == pos2o) {
+                                    pos3x = rand()
+                                }
+                                button[pos3x].innerHTML = 'X';
+                                button[pos3x].style.fontSize = '50px';
+                                button[pos3x].style.textAlign = 'center';
+                                button[pos3x].style.color = 'black';           
+                                if (window.matchMedia('(max-width: 1600px)').matches) {
+                                    button[pos3x].style.fontSize = '45px';
+                                }
+                                for (let i = 6; i < 15; i++) {
+                                    if (button[i].innerHTML != 'X' && button[i].innerHTML != 'O') {
+                                        button[i].disabled = false;
+                                    }                   
+                                }
+                                for (let pos3o = 6; pos3o < 15; pos3o++) {
+                                    button[pos3o].onclick = () => {
+                                        button[pos3o].innerHTML = 'O';
+                                        button[pos3o].style.fontSize = '50px';
+                                        button[pos3o].style.textAlign = 'center';
+                                        button[pos3o].style.color = 'black';
+                                        if (window.matchMedia('(max-width: 1600px)').matches) {
+                                            button[pos3o].style.fontSize = '45px';
+                                        }
+                                        for (let i = 6; i < 15; i++) {
+                                            button[i].disabled = true;
+                                        }
+                                        let fourth = () => {
+                                            let pos4x = rand();
+                                            while (pos4x == pos1x || pos4x == pos1o || pos4x == pos2x || pos4x == pos2o || pos4x == pos3x || pos4x == pos3o) {
+                                                pos4x = rand()
+                                            }
+                                            button[pos4x].innerHTML = 'X';
+                                            button[pos4x].style.fontSize = '50px';
+                                            button[pos4x].style.textAlign = 'center';
+                                            button[pos4x].style.color = 'black';           
+                                            if (window.matchMedia('(max-width: 1600px)').matches) {
+                                                button[pos4x].style.fontSize = '45px';
+                                            }
+                                            for (let i = 6; i < 15; i++) {
+                                                if (button[i].innerHTML != 'X' && button[i].innerHTML != 'O') {
+                                                    button[i].disabled = false;
+                                                }                   
+                                            }
+                                            for (let pos4o = 6; pos4o < 15; pos4o++) {
+                                                button[pos4o].onclick = () => {
+                                                    button[pos4o].innerHTML = 'O';
+                                                    button[pos4o].style.fontSize = '50px';
+                                                    button[pos4o].style.textAlign = 'center';
+                                                    button[pos4o].style.color = 'black';
+                                                    if (window.matchMedia('(max-width: 1600px)').matches) {
+                                                        button[pos4o].style.fontSize = '45px';
+                                                    }
+                                                    for (let i = 6; i < 15; i++) {
+                                                        button[i].disabled = true;
+                                                    }
+                                                    let fifth = () => {
+                                                        let pos5x = rand();
+                                                        while (pos5x == pos1x || pos5x == pos1o || pos5x == pos2x || pos5x == pos2o || pos5x == pos3x || pos5x == pos3o || pos5x == pos4x || pos5x == pos4o) {
+                                                            pos5x = rand()
+                                                        }
+                                                        button[pos5x].innerHTML = 'X';
+                                                        button[pos5x].style.fontSize = '50px';
+                                                        button[pos5x].style.textAlign = 'center';
+                                                        button[pos5x].style.color = 'black';           
+                                                        if (window.matchMedia('(max-width: 1600px)').matches) {
+                                                            button[pos5x].style.fontSize = '45px';
+                                                        }
+                                                        for (let i = 6; i < 15; i++) {
+                                                            if (button[i].innerHTML != 'X' && button[i].innerHTML != 'O') {
+                                                                button[i].disabled = false;
+                                                            }                   
+                                                        }
+                                                    }
+                                                    setTimeout(fifth, 1000)
+                                                }
+                                            }
+                                        }
+                                        setTimeout(fourth, 1000)  
+                                    }
+                                }
+                            }
+                            setTimeout(third, 1000)
+                        }
+                    }
                 }
                 setTimeout(second, 1000)
-                for (let pos2o = 6; pos2o < 15; pos2o++) {
-                    button[pos2o].onclick = () => {
-                        button[pos2o].innerHTML = 'O';
-                        button[pos2o].style.fontSize = '50px';
-                        button[pos2o].style.textAlign = 'center';
-                        button[pos2o].style.color = 'black';
-                        if (window.matchMedia('(max-width: 1600px)').matches) {
-                            button[pos1o].style.fontSize = '45px';
-                        }
-                        for (let i = 6; i < 15; i++) {
-                            button[i].disabled = true;
-                        }
-                    }
-                }
-                let third = () => {
-                    let int = setInterval(rand, 0);
-                    let pos3x = rand() 
-                    if (button[pos3x].innerHTML != 'X' && button[pos3x].innerHTML != 'O') {
-                        clearInterval(int);
-                    }
-                    button[pos3x].innerHTML = 'X';
-                    button[pos3x].style.fontSize = '50px';
-                    button[pos3x].style.textAlign = 'center';
-                    button[pos3x].style.color = 'black';           
-                    if (window.matchMedia('(max-width: 1600px)').matches) {
-                        button[pos3x].style.fontSize = '45px';
-                    }
-                    for (let i = 6; i < 15; i++) {
-                        if (button[i].innerHTML != 'X' && button[i].innerHTML != 'O') {
-                            button[i].disabled = false;
-                        }                   
-                    }
-                }
-                setTimeout(third, 1000)
             }
         }
     }
