@@ -440,7 +440,7 @@ addEventListener('DOMContentLoaded', () => {
                                                 button[i].disabled = 'true';
                                             }
                                             let winner = document.createElement('h1');
-                                            winner.innerHTML = 'First player won!';
+                                            winner.innerHTML = 'Second player won!';
                                             winner.style.textAlign = 'center';
                                             winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                             winner.style.backgroundSize = '100%';
@@ -467,7 +467,7 @@ addEventListener('DOMContentLoaded', () => {
                                                 button[i].disabled = 'true';
                                             }
                                             let winner = document.createElement('h1');
-                                            winner.innerHTML = 'First player won!';
+                                            winner.innerHTML = 'Second player won!';
                                             winner.style.textAlign = 'center';
                                             winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                             winner.style.backgroundSize = '100%';
@@ -494,7 +494,7 @@ addEventListener('DOMContentLoaded', () => {
                                                 button[i].disabled = 'true';
                                             }
                                             let winner = document.createElement('h1');
-                                            winner.innerHTML = 'First player won!';
+                                            winner.innerHTML = 'Second player won!';
                                             winner.style.textAlign = 'center';
                                             winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                             winner.style.backgroundSize = '100%';
@@ -521,7 +521,7 @@ addEventListener('DOMContentLoaded', () => {
                                                 button[i].disabled = 'true';
                                             }
                                             let winner = document.createElement('h1');
-                                            winner.innerHTML = 'First player won!';
+                                            winner.innerHTML = 'Second player won!';
                                             winner.style.textAlign = 'center';
                                             winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                             winner.style.backgroundSize = '100%';
@@ -548,7 +548,7 @@ addEventListener('DOMContentLoaded', () => {
                                                 button[i].disabled = 'true';
                                             }
                                             let winner = document.createElement('h1');
-                                            winner.innerHTML = 'First player won!';
+                                            winner.innerHTML = 'Second player won!';
                                             winner.style.textAlign = 'center';
                                             winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                             winner.style.backgroundSize = '100%';
@@ -575,7 +575,7 @@ addEventListener('DOMContentLoaded', () => {
                                                 button[i].disabled = 'true';
                                             }
                                             let winner = document.createElement('h1');
-                                            winner.innerHTML = 'First player won!';
+                                            winner.innerHTML = 'Second player won!';
                                             winner.style.textAlign = 'center';
                                             winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                             winner.style.backgroundSize = '100%';
@@ -602,7 +602,7 @@ addEventListener('DOMContentLoaded', () => {
                                                 button[i].disabled = 'true';
                                             }
                                             let winner = document.createElement('h1');
-                                            winner.innerHTML = 'First player won!';
+                                            winner.innerHTML = 'Second player won!';
                                             winner.style.textAlign = 'center';
                                             winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                             winner.style.backgroundSize = '100%';
@@ -629,7 +629,7 @@ addEventListener('DOMContentLoaded', () => {
                                                 button[i].disabled = 'true';
                                             }
                                             let winner = document.createElement('h1');
-                                            winner.innerHTML = 'First player won!';
+                                            winner.innerHTML = 'Second player won!';
                                             winner.style.textAlign = 'center';
                                             winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                             winner.style.backgroundSize = '100%';
@@ -901,7 +901,7 @@ addEventListener('DOMContentLoaded', () => {
                                                             button[i].disabled = 'true';
                                                         }
                                                         let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'First player won!';
+                                                        winner.innerHTML = 'Second player won!';
                                                         winner.style.textAlign = 'center';
                                                         winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                                         winner.style.backgroundSize = '100%';
@@ -928,7 +928,7 @@ addEventListener('DOMContentLoaded', () => {
                                                             button[i].disabled = 'true';
                                                         }
                                                         let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'First player won!';
+                                                        winner.innerHTML = 'Second player won!';
                                                         winner.style.textAlign = 'center';
                                                         winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                                         winner.style.backgroundSize = '100%';
@@ -955,7 +955,7 @@ addEventListener('DOMContentLoaded', () => {
                                                             button[i].disabled = 'true';
                                                         }
                                                         let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'First player won!';
+                                                        winner.innerHTML = 'Second player won!';
                                                         winner.style.textAlign = 'center';
                                                         winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                                         winner.style.backgroundSize = '100%';
@@ -982,7 +982,7 @@ addEventListener('DOMContentLoaded', () => {
                                                             button[i].disabled = 'true';
                                                         }
                                                         let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'First player won!';
+                                                        winner.innerHTML = 'Second player won!';
                                                         winner.style.textAlign = 'center';
                                                         winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                                         winner.style.backgroundSize = '100%';
@@ -1009,7 +1009,7 @@ addEventListener('DOMContentLoaded', () => {
                                                             button[i].disabled = 'true';
                                                         }
                                                         let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'First player won!';
+                                                        winner.innerHTML = 'Second player won!';
                                                         winner.style.textAlign = 'center';
                                                         winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                                         winner.style.backgroundSize = '100%';
@@ -1036,7 +1036,7 @@ addEventListener('DOMContentLoaded', () => {
                                                             button[i].disabled = 'true';
                                                         }
                                                         let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'First player won!';
+                                                        winner.innerHTML = 'Second player won!';
                                                         winner.style.textAlign = 'center';
                                                         winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                                         winner.style.backgroundSize = '100%';
@@ -1063,7 +1063,7 @@ addEventListener('DOMContentLoaded', () => {
                                                             button[i].disabled = 'true';
                                                         }
                                                         let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'First player won!';
+                                                        winner.innerHTML = 'Second player won!';
                                                         winner.style.textAlign = 'center';
                                                         winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                                         winner.style.backgroundSize = '100%';
@@ -1090,7 +1090,7 @@ addEventListener('DOMContentLoaded', () => {
                                                             button[i].disabled = 'true';
                                                         }
                                                         let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'First player won!';
+                                                        winner.innerHTML = 'Second player won!';
                                                         winner.style.textAlign = 'center';
                                                         winner.style.backgroundColor = 'rgb(237, 237, 237)';
                                                         winner.style.backgroundSize = '100%';
@@ -1361,5 +1361,13 @@ addEventListener('DOMContentLoaded', () => {
                 setTimeout(second, 1000)
             }
         }
+    }
+    medium.onclick = () => {
+        for (let i = 6; i < 15; i++) {
+            button[i].style.display = 'block';
+            button[i].disabled = true;
+        }
+        table[0].style.display = 'none';
+        table[1].style.visibility = 'visible';
     }
 })
