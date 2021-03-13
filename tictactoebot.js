@@ -8,24 +8,18 @@ addEventListener('DOMContentLoaded', () => {
     icon.href = 'icon.png';
     document.head.append(icon);
     document.title = 'Tic-Tac-Toe';
+    let score1 = 0;
+    let score2 = 0;
+    let score1st = document.getElementsByTagName('h2')[0]
+    score1st.innerHTML = `1st Player: ${score1}`;
+    score1st.style.display = 'none'
+    let score2nd = document.getElementsByTagName('h2')[1]
+    score2nd.innerHTML = `2nd Player: ${score2}`;
+    score2nd.style.display = 'none'
     let table = document.getElementsByTagName('table');
     table[1].style.visibility = 'hidden';
     let button = document.getElementsByTagName('button');
-    let td = document.getElementsByTagName('td')
-    for (let i = 0; i < 3; i++) {
-        button[i].style.color = 'black';
-        button[i].style.cursor = 'pointer';
-        if (window.matchMedia('(max-width: 1600px)').matches) {
-            button[i].style.fontSize = '27px';
-            button[i].style.height = '40px'
-            button[i].style.margin = '8px';
-        }
-        if (window.matchMedia('(min-width: 1601px)').matches) {
-            button[i].style.fontSize = '35px';
-            button[i].style.height = '50px';
-            button[i].style.margin = '10px';
-        }
-    }
+    let td = document.getElementsByTagName('td');
     let beginner = document.createElement('button');
     let medium = document.createElement('button');
     let pro = document.createElement('button');
@@ -72,6 +66,66 @@ addEventListener('DOMContentLoaded', () => {
         td[0].append(beginner);
         td[1].append(medium);
         td[2].append(pro);
+    }
+    beginner.onclick = () => {
+        bstart()
+    }
+    let winner = document.createElement('h1');
+    winner.style.textAlign = 'center';
+    winner.style.backgroundColor = 'rgb(237, 237, 237)';
+    winner.style.backgroundSize = '100%';
+    winner.style.color = 'gray';
+    winner.style.fontSize = '80px';
+    let replay = document.createElement('button');
+    replay.innerHTML = 'Rematch';
+    replay.style.textAlign = 'center';
+    replay.style.color = 'gray';
+    replay.style.fontSize = '80px';
+    replay.style.cursor = 'pointer';
+    replay.onclick = () => {
+        for (let i = 6; i < 15; i++) {
+            button[i].innerHTML = ''
+            button[i].disabled = true
+        }
+        winner.innerHTML = '';
+        winner.style.display = 'none';
+        replay.style.display = 'none';
+        bstart()
+    }
+    if (window.matchMedia('(max-width: 1600px)').matches) {
+        winner.style.fontSize = '60px';
+        replay.style.fontSize = '60px';
+    }
+    let win = player => {
+        for (let i = 6; i < 15; i++) {
+            button[i].disabled = 'true';
+        }      
+        winner.innerHTML = `${player} player won!`;
+        winner.style.display = 'block';
+        replay.style.display = 'block';
+        document.body.append(winner);
+        document.body.append(replay);
+        if (player == 'First') {
+            score1++
+            score1st.innerHTML = `1st Player: ${score1}`;
+        } else if (player == 'Second') {
+            score2++
+            score2nd.innerHTML = `2nd Player: ${score2}`;
+        }
+    }
+    for (let i = 0; i < 3; i++) {
+        button[i].style.color = 'black';
+        button[i].style.cursor = 'pointer';
+        if (window.matchMedia('(max-width: 1600px)').matches) {
+            button[i].style.fontSize = '27px';
+            button[i].style.height = '40px'
+            button[i].style.margin = '8px';
+        }
+        if (window.matchMedia('(min-width: 1601px)').matches) {
+            button[i].style.fontSize = '35px';
+            button[i].style.height = '50px';
+            button[i].style.margin = '10px';
+        }
     }
     button[1].onclick = () => {
         for (let i = 0; i < 3; i++) {
@@ -123,7 +177,9 @@ addEventListener('DOMContentLoaded', () => {
             button[4].style.display = 'block';
         }
     }
-    beginner.onclick = () => {
+    const bstart = () => {
+        score1st.style.display = 'block';
+        score2nd.style.display = 'block';
         let rand = () => {
             return Math.floor(Math.random() * 9 + 6);         
         }
@@ -208,220 +264,28 @@ addEventListener('DOMContentLoaded', () => {
                                     }                   
                                 }
                                 if (button[6].innerHTML == button[7].innerHTML && button[7].innerHTML == button[8].innerHTML && button[6].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             if (button[6].innerHTML == button[9].innerHTML && button[9].innerHTML == button[12].innerHTML && button[6].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             if (button[6].innerHTML == button[10].innerHTML && button[10].innerHTML == button[14].innerHTML && button[6].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             if (button[8].innerHTML == button[11].innerHTML && button[11].innerHTML == button[14].innerHTML && button[8].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             if (button[8].innerHTML == button[10].innerHTML && button[10].innerHTML == button[12].innerHTML && button[8].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             if (button[9].innerHTML == button[10].innerHTML && button[10].innerHTML == button[11].innerHTML && button[9].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             if (button[12].innerHTML == button[13].innerHTML && button[13].innerHTML == button[14].innerHTML && button[12].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             if (button[7].innerHTML == button[10].innerHTML && button[10].innerHTML == button[13].innerHTML && button[7].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                 for (let pos3o = 6; pos3o < 15; pos3o++) {
                                     button[pos3o].onclick = () => {
@@ -436,220 +300,28 @@ addEventListener('DOMContentLoaded', () => {
                                             button[i].disabled = true;
                                         }
                                         if (button[6].innerHTML == button[7].innerHTML && button[7].innerHTML == button[8].innerHTML && button[6].innerHTML != '') {
-                                            for (let i = 6; i < 15; i++) {
-                                                button[i].disabled = 'true';
-                                            }
-                                            let winner = document.createElement('h1');
-                                            winner.innerHTML = 'Second player won!';
-                                            winner.style.textAlign = 'center';
-                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                            winner.style.backgroundSize = '100%';
-                                            winner.style.color = 'gray';
-                                            winner.style.fontSize = '80px';
-                                            document.body.append(winner);
-                                            let replay = document.createElement('button');
-                                            replay.innerHTML = 'Rematch';
-                                            replay.style.textAlign = 'center';
-                                            replay.style.color = 'gray';
-                                            replay.style.fontSize = '80px';
-                                            replay.style.cursor = 'pointer';
-                                            document.body.append(replay);
-                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                winner.style.fontSize = '60px';
-                                                replay.style.fontSize = '60px';
-                                            }
-                                            replay.onclick = () => {
-                                                window.location.reload();
-                                            }
+                                            win('Second');
                                         }
                                         if (button[6].innerHTML == button[9].innerHTML && button[9].innerHTML == button[12].innerHTML && button[6].innerHTML != '') {
-                                            for (let i = 6; i < 15; i++) {
-                                                button[i].disabled = 'true';
-                                            }
-                                            let winner = document.createElement('h1');
-                                            winner.innerHTML = 'Second player won!';
-                                            winner.style.textAlign = 'center';
-                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                            winner.style.backgroundSize = '100%';
-                                            winner.style.color = 'gray';
-                                            winner.style.fontSize = '80px';
-                                            document.body.append(winner);
-                                            let replay = document.createElement('button');
-                                            replay.innerHTML = 'Rematch';
-                                            replay.style.textAlign = 'center';
-                                            replay.style.color = 'gray';
-                                            replay.style.fontSize = '80px';
-                                            replay.style.cursor = 'pointer';
-                                            document.body.append(replay);
-                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                winner.style.fontSize = '60px';
-                                                replay.style.fontSize = '60px';
-                                            }
-                                            replay.onclick = () => {
-                                                window.location.reload();
-                                            }
+                                            win('Second');
                                         }
                                         if (button[6].innerHTML == button[10].innerHTML && button[10].innerHTML == button[14].innerHTML && button[6].innerHTML != '') {
-                                            for (let i = 6; i < 15; i++) {
-                                                button[i].disabled = 'true';
-                                            }
-                                            let winner = document.createElement('h1');
-                                            winner.innerHTML = 'Second player won!';
-                                            winner.style.textAlign = 'center';
-                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                            winner.style.backgroundSize = '100%';
-                                            winner.style.color = 'gray';
-                                            winner.style.fontSize = '80px';
-                                            document.body.append(winner);
-                                            let replay = document.createElement('button');
-                                            replay.innerHTML = 'Rematch';
-                                            replay.style.textAlign = 'center';
-                                            replay.style.color = 'gray';
-                                            replay.style.fontSize = '80px';
-                                            replay.style.cursor = 'pointer';
-                                            document.body.append(replay);
-                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                winner.style.fontSize = '60px';
-                                                replay.style.fontSize = '60px';
-                                            }
-                                            replay.onclick = () => {
-                                                window.location.reload();
-                                            }
+                                            win('Second');
                                         }
                                         if (button[8].innerHTML == button[11].innerHTML && button[11].innerHTML == button[14].innerHTML && button[8].innerHTML != '') {
-                                            for (let i = 6; i < 15; i++) {
-                                                button[i].disabled = 'true';
-                                            }
-                                            let winner = document.createElement('h1');
-                                            winner.innerHTML = 'Second player won!';
-                                            winner.style.textAlign = 'center';
-                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                            winner.style.backgroundSize = '100%';
-                                            winner.style.color = 'gray';
-                                            winner.style.fontSize = '80px';
-                                            document.body.append(winner);
-                                            let replay = document.createElement('button');
-                                            replay.innerHTML = 'Rematch';
-                                            replay.style.textAlign = 'center';
-                                            replay.style.color = 'gray';
-                                            replay.style.fontSize = '80px';
-                                            replay.style.cursor = 'pointer';
-                                            document.body.append(replay);
-                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                winner.style.fontSize = '60px';
-                                                replay.style.fontSize = '60px';
-                                            }
-                                            replay.onclick = () => {
-                                                window.location.reload();
-                                            }
+                                            win('Second');
                                         }
                                         if (button[8].innerHTML == button[10].innerHTML && button[10].innerHTML == button[12].innerHTML && button[8].innerHTML != '') {
-                                            for (let i = 6; i < 15; i++) {
-                                                button[i].disabled = 'true';
-                                            }
-                                            let winner = document.createElement('h1');
-                                            winner.innerHTML = 'Second player won!';
-                                            winner.style.textAlign = 'center';
-                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                            winner.style.backgroundSize = '100%';
-                                            winner.style.color = 'gray';
-                                            winner.style.fontSize = '80px';
-                                            document.body.append(winner);
-                                            let replay = document.createElement('button');
-                                            replay.innerHTML = 'Rematch';
-                                            replay.style.textAlign = 'center';
-                                            replay.style.color = 'gray';
-                                            replay.style.fontSize = '80px';
-                                            replay.style.cursor = 'pointer';
-                                            document.body.append(replay);
-                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                winner.style.fontSize = '60px';
-                                                replay.style.fontSize = '60px';
-                                            }
-                                            replay.onclick = () => {
-                                                window.location.reload();
-                                            }
+                                            win('Second');
                                         }
                                         if (button[9].innerHTML == button[10].innerHTML && button[10].innerHTML == button[11].innerHTML && button[9].innerHTML != '') {
-                                            for (let i = 6; i < 15; i++) {
-                                                button[i].disabled = 'true';
-                                            }
-                                            let winner = document.createElement('h1');
-                                            winner.innerHTML = 'Second player won!';
-                                            winner.style.textAlign = 'center';
-                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                            winner.style.backgroundSize = '100%';
-                                            winner.style.color = 'gray';
-                                            winner.style.fontSize = '80px';
-                                            document.body.append(winner);
-                                            let replay = document.createElement('button');
-                                            replay.innerHTML = 'Rematch';
-                                            replay.style.textAlign = 'center';
-                                            replay.style.color = 'gray';
-                                            replay.style.fontSize = '80px';
-                                            replay.style.cursor = 'pointer';
-                                            document.body.append(replay);
-                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                winner.style.fontSize = '60px';
-                                                replay.style.fontSize = '60px';
-                                            }
-                                            replay.onclick = () => {
-                                                window.location.reload();
-                                            }
+                                            win('Second');
                                         }
                                         if (button[12].innerHTML == button[13].innerHTML && button[13].innerHTML == button[14].innerHTML && button[12].innerHTML != '') {
-                                            for (let i = 6; i < 15; i++) {
-                                                button[i].disabled = 'true';
-                                            }
-                                            let winner = document.createElement('h1');
-                                            winner.innerHTML = 'Second player won!';
-                                            winner.style.textAlign = 'center';
-                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                            winner.style.backgroundSize = '100%';
-                                            winner.style.color = 'gray';
-                                            winner.style.fontSize = '80px';
-                                            document.body.append(winner);
-                                            let replay = document.createElement('button');
-                                            replay.innerHTML = 'Rematch';
-                                            replay.style.textAlign = 'center';
-                                            replay.style.color = 'gray';
-                                            replay.style.fontSize = '80px';
-                                            replay.style.cursor = 'pointer';
-                                            document.body.append(replay);
-                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                winner.style.fontSize = '60px';
-                                                replay.style.fontSize = '60px';
-                                            }
-                                            replay.onclick = () => {
-                                                window.location.reload();
-                                            }
+                                            win('Second');
                                         }
                                         if (button[7].innerHTML == button[10].innerHTML && button[10].innerHTML == button[13].innerHTML && button[7].innerHTML != '') {
-                                            for (let i = 6; i < 15; i++) {
-                                                button[i].disabled = 'true';
-                                            }
-                                            let winner = document.createElement('h1');
-                                            winner.innerHTML = 'Second player won!';
-                                            winner.style.textAlign = 'center';
-                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                            winner.style.backgroundSize = '100%';
-                                            winner.style.color = 'gray';
-                                            winner.style.fontSize = '80px';
-                                            document.body.append(winner);
-                                            let replay = document.createElement('button');
-                                            replay.innerHTML = 'Rematch';
-                                            replay.style.textAlign = 'center';
-                                            replay.style.color = 'gray';
-                                            replay.style.fontSize = '80px';
-                                            replay.style.cursor = 'pointer';
-                                            document.body.append(replay);
-                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                winner.style.fontSize = '60px';
-                                                replay.style.fontSize = '60px';
-                                            }
-                                            replay.onclick = () => {
-                                                window.location.reload();
-                                            }
+                                            win('Second');
                                         }
                                         let fourth = () => {
                                             let pos4x = rand();
@@ -669,220 +341,28 @@ addEventListener('DOMContentLoaded', () => {
                                                 }                   
                                             }
                                             if (button[6].innerHTML == button[7].innerHTML && button[7].innerHTML == button[8].innerHTML && button[6].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             if (button[6].innerHTML == button[9].innerHTML && button[9].innerHTML == button[12].innerHTML && button[6].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             if (button[6].innerHTML == button[10].innerHTML && button[10].innerHTML == button[14].innerHTML && button[6].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             if (button[8].innerHTML == button[11].innerHTML && button[11].innerHTML == button[14].innerHTML && button[8].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             if (button[8].innerHTML == button[10].innerHTML && button[10].innerHTML == button[12].innerHTML && button[8].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             if (button[9].innerHTML == button[10].innerHTML && button[10].innerHTML == button[11].innerHTML && button[9].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             if (button[12].innerHTML == button[13].innerHTML && button[13].innerHTML == button[14].innerHTML && button[12].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             if (button[7].innerHTML == button[10].innerHTML && button[10].innerHTML == button[13].innerHTML && button[7].innerHTML != '') {
-                                                for (let i = 6; i < 15; i++) {
-                                                    button[i].disabled = 'true';
-                                                }
-                                                let winner = document.createElement('h1');
-                                                winner.innerHTML = 'First player won!';
-                                                winner.style.textAlign = 'center';
-                                                winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                winner.style.backgroundSize = '100%';
-                                                winner.style.color = 'gray';
-                                                winner.style.fontSize = '80px';
-                                                document.body.append(winner);
-                                                let replay = document.createElement('button');
-                                                replay.innerHTML = 'Rematch';
-                                                replay.style.textAlign = 'center';
-                                                replay.style.color = 'gray';
-                                                replay.style.fontSize = '80px';
-                                                replay.style.cursor = 'pointer';
-                                                document.body.append(replay);
-                                                if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                    winner.style.fontSize = '60px';
-                                                    replay.style.fontSize = '60px';
-                                                }
-                                                replay.onclick = () => {
-                                                    window.location.reload();
-                                                }
+                                                win('First');
                                             }
                                             for (let pos4o = 6; pos4o < 15; pos4o++) {
                                                 button[pos4o].onclick = () => {
@@ -897,220 +377,28 @@ addEventListener('DOMContentLoaded', () => {
                                                         button[i].disabled = true;
                                                     }
                                                     if (button[6].innerHTML == button[7].innerHTML && button[7].innerHTML == button[8].innerHTML && button[6].innerHTML != '') {
-                                                        for (let i = 6; i < 15; i++) {
-                                                            button[i].disabled = 'true';
-                                                        }
-                                                        let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'Second player won!';
-                                                        winner.style.textAlign = 'center';
-                                                        winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                        winner.style.backgroundSize = '100%';
-                                                        winner.style.color = 'gray';
-                                                        winner.style.fontSize = '80px';
-                                                        document.body.append(winner);
-                                                        let replay = document.createElement('button');
-                                                        replay.innerHTML = 'Rematch';
-                                                        replay.style.textAlign = 'center';
-                                                        replay.style.color = 'gray';
-                                                        replay.style.fontSize = '80px';
-                                                        replay.style.cursor = 'pointer';
-                                                        document.body.append(replay);
-                                                        if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                            winner.style.fontSize = '60px';
-                                                            replay.style.fontSize = '60px';
-                                                        }
-                                                        replay.onclick = () => {
-                                                            window.location.reload();
-                                                        }
+                                                        win('Second');
                                                     }
                                                     if (button[6].innerHTML == button[9].innerHTML && button[9].innerHTML == button[12].innerHTML && button[6].innerHTML != '') {
-                                                        for (let i = 6; i < 15; i++) {
-                                                            button[i].disabled = 'true';
-                                                        }
-                                                        let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'Second player won!';
-                                                        winner.style.textAlign = 'center';
-                                                        winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                        winner.style.backgroundSize = '100%';
-                                                        winner.style.color = 'gray';
-                                                        winner.style.fontSize = '80px';
-                                                        document.body.append(winner);
-                                                        let replay = document.createElement('button');
-                                                        replay.innerHTML = 'Rematch';
-                                                        replay.style.textAlign = 'center';
-                                                        replay.style.color = 'gray';
-                                                        replay.style.fontSize = '80px';
-                                                        replay.style.cursor = 'pointer';
-                                                        document.body.append(replay);
-                                                        if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                            winner.style.fontSize = '60px';
-                                                            replay.style.fontSize = '60px';
-                                                        }
-                                                        replay.onclick = () => {
-                                                            window.location.reload();
-                                                        }
+                                                        win('Second');
                                                     }
                                                     if (button[6].innerHTML == button[10].innerHTML && button[10].innerHTML == button[14].innerHTML && button[6].innerHTML != '') {
-                                                        for (let i = 6; i < 15; i++) {
-                                                            button[i].disabled = 'true';
-                                                        }
-                                                        let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'Second player won!';
-                                                        winner.style.textAlign = 'center';
-                                                        winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                        winner.style.backgroundSize = '100%';
-                                                        winner.style.color = 'gray';
-                                                        winner.style.fontSize = '80px';
-                                                        document.body.append(winner);
-                                                        let replay = document.createElement('button');
-                                                        replay.innerHTML = 'Rematch';
-                                                        replay.style.textAlign = 'center';
-                                                        replay.style.color = 'gray';
-                                                        replay.style.fontSize = '80px';
-                                                        replay.style.cursor = 'pointer';
-                                                        document.body.append(replay);
-                                                        if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                            winner.style.fontSize = '60px';
-                                                            replay.style.fontSize = '60px';
-                                                        }
-                                                        replay.onclick = () => {
-                                                            window.location.reload();
-                                                        }
+                                                        win('Second');
                                                     }
                                                     if (button[8].innerHTML == button[11].innerHTML && button[11].innerHTML == button[14].innerHTML && button[8].innerHTML != '') {
-                                                        for (let i = 6; i < 15; i++) {
-                                                            button[i].disabled = 'true';
-                                                        }
-                                                        let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'Second player won!';
-                                                        winner.style.textAlign = 'center';
-                                                        winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                        winner.style.backgroundSize = '100%';
-                                                        winner.style.color = 'gray';
-                                                        winner.style.fontSize = '80px';
-                                                        document.body.append(winner);
-                                                        let replay = document.createElement('button');
-                                                        replay.innerHTML = 'Rematch';
-                                                        replay.style.textAlign = 'center';
-                                                        replay.style.color = 'gray';
-                                                        replay.style.fontSize = '80px';
-                                                        replay.style.cursor = 'pointer';
-                                                        document.body.append(replay);
-                                                        if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                            winner.style.fontSize = '60px';
-                                                            replay.style.fontSize = '60px';
-                                                        }
-                                                        replay.onclick = () => {
-                                                            window.location.reload();
-                                                        }
+                                                        win('Second');
                                                     }
                                                     if (button[8].innerHTML == button[10].innerHTML && button[10].innerHTML == button[12].innerHTML && button[8].innerHTML != '') {
-                                                        for (let i = 6; i < 15; i++) {
-                                                            button[i].disabled = 'true';
-                                                        }
-                                                        let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'Second player won!';
-                                                        winner.style.textAlign = 'center';
-                                                        winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                        winner.style.backgroundSize = '100%';
-                                                        winner.style.color = 'gray';
-                                                        winner.style.fontSize = '80px';
-                                                        document.body.append(winner);
-                                                        let replay = document.createElement('button');
-                                                        replay.innerHTML = 'Rematch';
-                                                        replay.style.textAlign = 'center';
-                                                        replay.style.color = 'gray';
-                                                        replay.style.fontSize = '80px';
-                                                        replay.style.cursor = 'pointer';
-                                                        document.body.append(replay);
-                                                        if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                            winner.style.fontSize = '60px';
-                                                            replay.style.fontSize = '60px';
-                                                        }
-                                                        replay.onclick = () => {
-                                                            window.location.reload();
-                                                        }
+                                                        win('Second');
                                                     }
                                                     if (button[9].innerHTML == button[10].innerHTML && button[10].innerHTML == button[11].innerHTML && button[9].innerHTML != '') {
-                                                        for (let i = 6; i < 15; i++) {
-                                                            button[i].disabled = 'true';
-                                                        }
-                                                        let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'Second player won!';
-                                                        winner.style.textAlign = 'center';
-                                                        winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                        winner.style.backgroundSize = '100%';
-                                                        winner.style.color = 'gray';
-                                                        winner.style.fontSize = '80px';
-                                                        document.body.append(winner);
-                                                        let replay = document.createElement('button');
-                                                        replay.innerHTML = 'Rematch';
-                                                        replay.style.textAlign = 'center';
-                                                        replay.style.color = 'gray';
-                                                        replay.style.fontSize = '80px';
-                                                        replay.style.cursor = 'pointer';
-                                                        document.body.append(replay);
-                                                        if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                            winner.style.fontSize = '60px';
-                                                            replay.style.fontSize = '60px';
-                                                        }
-                                                        replay.onclick = () => {
-                                                            window.location.reload();
-                                                        }
+                                                        win('Second');
                                                     }
                                                     if (button[12].innerHTML == button[13].innerHTML && button[13].innerHTML == button[14].innerHTML && button[12].innerHTML != '') {
-                                                        for (let i = 6; i < 15; i++) {
-                                                            button[i].disabled = 'true';
-                                                        }
-                                                        let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'Second player won!';
-                                                        winner.style.textAlign = 'center';
-                                                        winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                        winner.style.backgroundSize = '100%';
-                                                        winner.style.color = 'gray';
-                                                        winner.style.fontSize = '80px';
-                                                        document.body.append(winner);
-                                                        let replay = document.createElement('button');
-                                                        replay.innerHTML = 'Rematch';
-                                                        replay.style.textAlign = 'center';
-                                                        replay.style.color = 'gray';
-                                                        replay.style.fontSize = '80px';
-                                                        replay.style.cursor = 'pointer';
-                                                        document.body.append(replay);
-                                                        if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                            winner.style.fontSize = '60px';
-                                                            replay.style.fontSize = '60px';
-                                                        }
-                                                        replay.onclick = () => {
-                                                            window.location.reload();
-                                                        }
+                                                        win('Second');
                                                     }
                                                     if (button[7].innerHTML == button[10].innerHTML && button[10].innerHTML == button[13].innerHTML && button[7].innerHTML != '') {
-                                                        for (let i = 6; i < 15; i++) {
-                                                            button[i].disabled = 'true';
-                                                        }
-                                                        let winner = document.createElement('h1');
-                                                        winner.innerHTML = 'Second player won!';
-                                                        winner.style.textAlign = 'center';
-                                                        winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                        winner.style.backgroundSize = '100%';
-                                                        winner.style.color = 'gray';
-                                                        winner.style.fontSize = '80px';
-                                                        document.body.append(winner);
-                                                        let replay = document.createElement('button');
-                                                        replay.innerHTML = 'Rematch';
-                                                        replay.style.textAlign = 'center';
-                                                        replay.style.color = 'gray';
-                                                        replay.style.fontSize = '80px';
-                                                        replay.style.cursor = 'pointer';
-                                                        document.body.append(replay);
-                                                        if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                            winner.style.fontSize = '60px';
-                                                            replay.style.fontSize = '60px';
-                                                        }
-                                                        replay.onclick = () => {
-                                                            window.location.reload();
-                                                        }
+                                                        win('Second');
                                                     }
                                                     let fifth = () => {
                                                         let pos5x = rand();
@@ -1130,227 +418,44 @@ addEventListener('DOMContentLoaded', () => {
                                                             }                   
                                                         }
                                                         if (button[6].innerHTML == button[7].innerHTML && button[7].innerHTML == button[8].innerHTML && button[6].innerHTML != '') {
-                                                            for (let i = 6; i < 15; i++) {
-                                                                button[i].disabled = 'true';
-                                                            }
-                                                            let winner = document.createElement('h1');
-                                                            winner.innerHTML = 'First player won!';
-                                                            winner.style.textAlign = 'center';
-                                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                            winner.style.backgroundSize = '100%';
-                                                            winner.style.color = 'gray';
-                                                            winner.style.fontSize = '80px';
-                                                            document.body.append(winner);
-                                                            let replay = document.createElement('button');
-                                                            replay.innerHTML = 'Rematch';
-                                                            replay.style.textAlign = 'center';
-                                                            replay.style.color = 'gray';
-                                                            replay.style.fontSize = '80px';
-                                                            replay.style.cursor = 'pointer';
-                                                            document.body.append(replay);
-                                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                                winner.style.fontSize = '60px';
-                                                                replay.style.fontSize = '60px';
-                                                            }
-                                                            replay.onclick = () => {
-                                                                window.location.reload();
-                                                            }
+                                                            win('First');
                                                         }
                                                         if (button[6].innerHTML == button[9].innerHTML && button[9].innerHTML == button[12].innerHTML && button[6].innerHTML != '') {
-                                                            for (let i = 6; i < 15; i++) {
-                                                                button[i].disabled = 'true';
-                                                            }
-                                                            let winner = document.createElement('h1');
-                                                            winner.innerHTML = 'First player won!';
-                                                            winner.style.textAlign = 'center';
-                                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                            winner.style.backgroundSize = '100%';
-                                                            winner.style.color = 'gray';
-                                                            winner.style.fontSize = '80px';
-                                                            document.body.append(winner);
-                                                            let replay = document.createElement('button');
-                                                            replay.innerHTML = 'Rematch';
-                                                            replay.style.textAlign = 'center';
-                                                            replay.style.color = 'gray';
-                                                            replay.style.fontSize = '80px';
-                                                            replay.style.cursor = 'pointer';
-                                                            document.body.append(replay);
-                                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                                winner.style.fontSize = '60px';
-                                                                replay.style.fontSize = '60px';
-                                                            }
-                                                            replay.onclick = () => {
-                                                                window.location.reload();
-                                                            }
+                                                            win('First');
                                                         }
                                                         if (button[6].innerHTML == button[10].innerHTML && button[10].innerHTML == button[14].innerHTML && button[6].innerHTML != '') {
-                                                            for (let i = 6; i < 15; i++) {
-                                                                button[i].disabled = 'true';
-                                                            }
-                                                            let winner = document.createElement('h1');
-                                                            winner.innerHTML = 'First player won!';
-                                                            winner.style.textAlign = 'center';
-                                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                            winner.style.backgroundSize = '100%';
-                                                            winner.style.color = 'gray';
-                                                            winner.style.fontSize = '80px';
-                                                            document.body.append(winner);
-                                                            let replay = document.createElement('button');
-                                                            replay.innerHTML = 'Rematch';
-                                                            replay.style.textAlign = 'center';
-                                                            replay.style.color = 'gray';
-                                                            replay.style.fontSize = '80px';
-                                                            replay.style.cursor = 'pointer';
-                                                            document.body.append(replay);
-                                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                                winner.style.fontSize = '60px';
-                                                                replay.style.fontSize = '60px';
-                                                            }
-                                                            replay.onclick = () => {
-                                                                window.location.reload();
-                                                            }
+                                                            win('First');
                                                         }
                                                         if (button[8].innerHTML == button[11].innerHTML && button[11].innerHTML == button[14].innerHTML && button[8].innerHTML != '') {
-                                                            for (let i = 6; i < 15; i++) {
-                                                                button[i].disabled = 'true';
-                                                            }
-                                                            let winner = document.createElement('h1');
-                                                            winner.innerHTML = 'First player won!';
-                                                            winner.style.textAlign = 'center';
-                                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                            winner.style.backgroundSize = '100%';
-                                                            winner.style.color = 'gray';
-                                                            winner.style.fontSize = '80px';
-                                                            document.body.append(winner);
-                                                            let replay = document.createElement('button');
-                                                            replay.innerHTML = 'Rematch';
-                                                            replay.style.textAlign = 'center';
-                                                            replay.style.color = 'gray';
-                                                            replay.style.fontSize = '80px';
-                                                            replay.style.cursor = 'pointer';
-                                                            document.body.append(replay);
-                                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                                winner.style.fontSize = '60px';
-                                                                replay.style.fontSize = '60px';
-                                                            }
-                                                            replay.onclick = () => {
-                                                                window.location.reload();
-                                                            }
+                                                            win('First');
                                                         }
                                                         if (button[8].innerHTML == button[10].innerHTML && button[10].innerHTML == button[12].innerHTML && button[8].innerHTML != '') {
-                                                            for (let i = 6; i < 15; i++) {
-                                                                button[i].disabled = 'true';
-                                                            }
-                                                            let winner = document.createElement('h1');
-                                                            winner.innerHTML = 'First player won!';
-                                                            winner.style.textAlign = 'center';
-                                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                            winner.style.backgroundSize = '100%';
-                                                            winner.style.color = 'gray';
-                                                            winner.style.fontSize = '80px';
-                                                            document.body.append(winner);
-                                                            let replay = document.createElement('button');
-                                                            replay.innerHTML = 'Rematch';
-                                                            replay.style.textAlign = 'center';
-                                                            replay.style.color = 'gray';
-                                                            replay.style.fontSize = '80px';
-                                                            replay.style.cursor = 'pointer';
-                                                            document.body.append(replay);
-                                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                                winner.style.fontSize = '60px';
-                                                                replay.style.fontSize = '60px';
-                                                            }
-                                                            replay.onclick = () => {
-                                                                window.location.reload();
-                                                            }
+                                                            win('First');
                                                         }
                                                         if (button[9].innerHTML == button[10].innerHTML && button[10].innerHTML == button[11].innerHTML && button[9].innerHTML != '') {
-                                                            for (let i = 6; i < 15; i++) {
-                                                                button[i].disabled = 'true';
-                                                            }
-                                                            let winner = document.createElement('h1');
-                                                            winner.innerHTML = 'First player won!';
-                                                            winner.style.textAlign = 'center';
-                                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                            winner.style.backgroundSize = '100%';
-                                                            winner.style.color = 'gray';
-                                                            winner.style.fontSize = '80px';
-                                                            document.body.append(winner);
-                                                            let replay = document.createElement('button');
-                                                            replay.innerHTML = 'Rematch';
-                                                            replay.style.textAlign = 'center';
-                                                            replay.style.color = 'gray';
-                                                            replay.style.fontSize = '80px';
-                                                            replay.style.cursor = 'pointer';
-                                                            document.body.append(replay);
-                                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                                winner.style.fontSize = '60px';
-                                                                replay.style.fontSize = '60px';
-                                                            }
-                                                            replay.onclick = () => {
-                                                                window.location.reload();
-                                                            }
+                                                            win('First');
                                                         }
                                                         if (button[12].innerHTML == button[13].innerHTML && button[13].innerHTML == button[14].innerHTML && button[12].innerHTML != '') {
-                                                            for (let i = 6; i < 15; i++) {
-                                                                button[i].disabled = 'true';
-                                                            }
-                                                            let winner = document.createElement('h1');
-                                                            winner.innerHTML = 'First player won!';
-                                                            winner.style.textAlign = 'center';
-                                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                            winner.style.backgroundSize = '100%';
-                                                            winner.style.color = 'gray';
-                                                            winner.style.fontSize = '80px';
-                                                            document.body.append(winner);
-                                                            let replay = document.createElement('button');
-                                                            replay.innerHTML = 'Rematch';
-                                                            replay.style.textAlign = 'center';
-                                                            replay.style.color = 'gray';
-                                                            replay.style.fontSize = '80px';
-                                                            replay.style.cursor = 'pointer';
-                                                            document.body.append(replay);
-                                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                                winner.style.fontSize = '60px';
-                                                                replay.style.fontSize = '60px';
-                                                            }
-                                                            replay.onclick = () => {
-                                                                window.location.reload();
-                                                            }
+                                                            win('First');
                                                         }
                                                         if (button[7].innerHTML == button[10].innerHTML && button[10].innerHTML == button[13].innerHTML && button[7].innerHTML != '') {
-                                                            for (let i = 6; i < 15; i++) {
-                                                                button[i].disabled = 'true';
-                                                            }
-                                                            let winner = document.createElement('h1');
-                                                            winner.innerHTML = 'First player won!';
-                                                            winner.style.textAlign = 'center';
-                                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
-                                                            winner.style.backgroundSize = '100%';
-                                                            winner.style.color = 'gray';
-                                                            winner.style.fontSize = '80px';
+                                                            win('First');
+                                                        }
+                                                        if (winner.innerHTML == '') {
+                                                            winner.innerHTML = 'It was a draw!';
                                                             document.body.append(winner);
-                                                            let replay = document.createElement('button');
-                                                            replay.innerHTML = 'Rematch';
-                                                            replay.style.textAlign = 'center';
-                                                            replay.style.color = 'gray';
-                                                            replay.style.fontSize = '80px';
-                                                            replay.style.cursor = 'pointer';
                                                             document.body.append(replay);
-                                                            if (window.matchMedia('(max-width: 1600px)').matches) {
-                                                                winner.style.fontSize = '60px';
-                                                                replay.style.fontSize = '60px';
-                                                            }
-                                                            replay.onclick = () => {
-                                                                window.location.reload();
-                                                            }
                                                         }
                                                     }
-                                                    setTimeout(fifth, 1000)
+                                                    if (!(winner.innerHTML == 'Second player won!')) {
+                                                        setTimeout(fifth, 1000)
+                                                    } 
                                                 }
                                             }
                                         }
-                                        setTimeout(fourth, 1000)  
+                                        if (!(winner.innerHTML == 'Second player won!')) {
+                                            setTimeout(fourth, 1000)  
+                                        } 
                                     }
                                 }
                             }
