@@ -442,9 +442,35 @@ addEventListener('DOMContentLoaded', () => {
                                                             win('First');
                                                         }
                                                         if (winner.innerHTML == '') {
-                                                            winner.innerHTML = 'It was a draw!';
+                                                            let winner = document.createElement('h1');
+                                                            winner.innerHTML = 'It was a draw!'
+                                                            winner.style.textAlign = 'center';
+                                                            winner.style.backgroundColor = 'rgb(237, 237, 237)';
+                                                            winner.style.backgroundSize = '100%';
+                                                            winner.style.color = 'gray';
+                                                            winner.style.fontSize = '80px';
+                                                            let replay = document.createElement('button');
+                                                            replay.innerHTML = 'Rematch';
+                                                            replay.style.textAlign = 'center';
+                                                            replay.style.color = 'gray';
+                                                            replay.style.fontSize = '80px';
+                                                            replay.style.cursor = 'pointer';
+                                                            replay.onclick = () => {
+                                                                for (let i = 6; i < 15; i++) {
+                                                                    button[i].innerHTML = ''
+                                                                    button[i].disabled = true
+                                                                }
+                                                                winner.innerHTML = '';
+                                                                winner.style.display = 'none';
+                                                                replay.style.display = 'none';
+                                                                bstart()
+                                                            }
+                                                            if (window.matchMedia('(max-width: 1600px)').matches) {
+                                                                winner.style.fontSize = '60px';
+                                                                replay.style.fontSize = '60px';
+                                                            }
                                                             document.body.append(winner);
-                                                            document.body.append(replay);
+                                                            document.body.append(replay)
                                                         }
                                                     }
                                                     if (!(winner.innerHTML == 'Second player won!')) {
