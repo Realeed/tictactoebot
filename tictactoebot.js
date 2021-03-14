@@ -174,7 +174,7 @@ addEventListener('DOMContentLoaded', () => {
         }      
         winner.innerHTML = `${player} player won!`;
         winner.style.display = 'block';
-        replay.style.display = 'block';
+        replaytwo.style.display = 'block';
         document.body.append(winner);
         document.body.append(replaytwo);
         if (player == 'First') {
