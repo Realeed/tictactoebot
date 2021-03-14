@@ -151,6 +151,23 @@ addEventListener('DOMContentLoaded', () => {
             score2nd.innerHTML = `2nd Player: ${score2}`;
         }
     }
+    let wintwo = player => {
+        for (let i = 7; i < 16; i++) {
+            button[i].disabled = 'true';
+        }      
+        winner.innerHTML = `${player} player won!`;
+        winner.style.display = 'block';
+        replay.style.display = 'block';
+        document.body.append(winner);
+        document.body.append(replay);
+        if (player == 'First') {
+            score1++
+            score1st.innerHTML = `1st Player: ${score1}`;
+        } else if (player == 'Second') {
+            score2++
+            score2nd.innerHTML = `2nd Player: ${score2}`;
+        }
+    }
     for (let i = 0; i < 3; i++) {
         button[i].style.color = 'black';
         button[i].style.cursor = 'pointer';
@@ -637,28 +654,28 @@ addEventListener('DOMContentLoaded', () => {
                                                 }
                                                 button[pos3x].disabled = true;
                                                 if (button[7].innerHTML == button[8].innerHTML && button[8].innerHTML == button[9].innerHTML && button[7].innerHTML != '') {
-                                                    win('First');
+                                                    wintwo('First');
                                                 }
                                                 if (button[7].innerHTML == button[10].innerHTML && button[10].innerHTML == button[13].innerHTML && button[7].innerHTML != '') {
-                                                    win('First');
+                                                    wintwo('First');
                                                 }
                                                 if (button[7].innerHTML == button[11].innerHTML && button[11].innerHTML == button[15].innerHTML && button[7].innerHTML != '') {
-                                                    win('First');
+                                                    wintwo('First');
                                                 }
                                                 if (button[9].innerHTML == button[12].innerHTML && button[12].innerHTML == button[15].innerHTML && button[9].innerHTML != '') {
-                                                    win('First');
+                                                    wintwo('First');
                                                 }
                                                 if (button[9].innerHTML == button[11].innerHTML && button[11].innerHTML == button[13].innerHTML && button[9].innerHTML != '') {
-                                                    win('First');
+                                                    wintwo('First');
                                                 }
                                                 if (button[10].innerHTML == button[11].innerHTML && button[11].innerHTML == button[12].innerHTML && button[10].innerHTML != '') {
-                                                    win('First');
+                                                    wintwo('First');
                                                 }
                                                 if (button[13].innerHTML == button[14].innerHTML && button[14].innerHTML == button[15].innerHTML && button[13].innerHTML != '') {
-                                                    win('First');
+                                                    wintwo('First');
                                                 }
                                                 if (button[8].innerHTML == button[11].innerHTML && button[11].innerHTML == button[14].innerHTML && button[8].innerHTML != '') {
-                                                    win('First');
+                                                    wintwo('First');
                                                 }
                                             }
                                         }
