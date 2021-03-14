@@ -42,6 +42,12 @@ addEventListener('DOMContentLoaded', () => {
     replay.style.color = 'gray';
     replay.style.fontSize = '80px';
     replay.style.cursor = 'pointer';
+    let replaytwo = document.createElement('button');
+    replaytwo.innerHTML = 'Rematch';
+    replaytwo.style.textAlign = 'center';
+    replaytwo.style.color = 'gray';
+    replaytwo.style.fontSize = '80px';
+    replaytwo.style.cursor = 'pointer';
     replay.onclick = () => {
         for (let i = 10; i < 19; i++) {
             button[i].innerHTML = ''
@@ -50,11 +56,22 @@ addEventListener('DOMContentLoaded', () => {
         winner.innerHTML = '';
         winner.style.display = 'none';
         replay.style.display = 'none';
-        bstart()
+        bStart()
+    }
+    replaytwo.onclick = () => {
+        for (let i = 7; i < 16; i++) {
+            button[i].innerHTML = ''
+            button[i].disabled = true
+        }
+        winner.innerHTML = '';
+        winner.style.display = 'none';
+        replaytwo.style.display = 'none';
+        twoStart()
     }
     if (window.matchMedia('(max-width: 1600px)').matches) {
         winner.style.fontSize = '60px';
         replay.style.fontSize = '60px';
+        replaytwo.style.fontSize = '60px'
     }
     onePlayer.innerHTML = '1 player';
     onePlayer.style.color = 'black';
@@ -129,10 +146,10 @@ addEventListener('DOMContentLoaded', () => {
 
     }
     beginner.onclick = () => {
-        bstart()
+        bStart()
     }
     twoPlayer.onclick = () => {
-
+        twoStart()
     }
     let win = player => {
         for (let i = 10; i < 19; i++) {
@@ -159,7 +176,7 @@ addEventListener('DOMContentLoaded', () => {
         winner.style.display = 'block';
         replay.style.display = 'block';
         document.body.append(winner);
-        document.body.append(replay);
+        document.body.append(replaytwo);
         if (player == 'First') {
             score1++
             score1st.innerHTML = `1st Player: ${score1}`;
@@ -237,7 +254,7 @@ addEventListener('DOMContentLoaded', () => {
         volume.style.display = 'block';
         ret.style.display = 'block';
     }
-    const bstart = () => {
+    const bStart = () => {
         score1st.style.display = 'block';
         score2nd.style.display = 'block';
         let rand = () => {
@@ -550,7 +567,7 @@ addEventListener('DOMContentLoaded', () => {
                                                                 winner.innerHTML = '';
                                                                 winner.style.display = 'none';
                                                                 replay.style.display = 'none';
-                                                                bstart()
+                                                                bStart()
                                                             }
                                                             if (window.matchMedia('(max-width: 1600px)').matches) {
                                                                 winner.style.fontSize = '60px';
@@ -580,7 +597,7 @@ addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-    twoPlayer.onclick = () => {
+    const twoStart = () => {
         score1st.style.display = 'block';
         score2nd.style.display = 'block';
         for (let i = 7; i < 16; i++) {
