@@ -61,7 +61,7 @@ addEventListener('DOMContentLoaded', () => {
     replaytwo.onclick = () => {
         for (let i = 7; i < 16; i++) {
             button[i].innerHTML = ''
-            button[i].disabled = true
+            button[i].disabled = false
         }
         winner.innerHTML = '';
         winner.style.display = 'none';
