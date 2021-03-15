@@ -36,6 +36,13 @@ addEventListener('DOMContentLoaded', () => {
     winner.style.backgroundSize = '100%';
     winner.style.color = 'gray';
     winner.style.fontSize = '80px';
+    let about = document.createElement('h1');
+    about.innerHTML = 'TicTacToe game made by Jacob'
+    about.style.textAlign = 'center';
+    about.style.backgroundColor = 'rgb(237, 237, 237)';
+    about.style.backgroundSize = '100%';
+    about.style.color = 'gray';
+    about.style.fontSize = '80px';
     let replay = document.createElement('button');
     replay.innerHTML = 'Rematch';
     replay.style.textAlign = 'center';
@@ -49,7 +56,7 @@ addEventListener('DOMContentLoaded', () => {
     replaytwo.style.fontSize = '80px';
     replaytwo.style.cursor = 'pointer';
     replay.onclick = () => {
-        for (let i = 10; i < 19; i++) {
+        for (let i = 11; i < 20; i++) {
             button[i].innerHTML = ''
             button[i].disabled = true
         }
@@ -59,7 +66,7 @@ addEventListener('DOMContentLoaded', () => {
         bStart()
     }
     replaytwo.onclick = () => {
-        for (let i = 7; i < 16; i++) {
+        for (let i = 8; i < 17; i++) {
             button[i].innerHTML = ''
             button[i].disabled = false
         }
@@ -68,10 +75,17 @@ addEventListener('DOMContentLoaded', () => {
         replaytwo.style.display = 'none';
         twoStart()
     }
+    let menu = document.createElement('button');
+    menu.innerHTML = 'Main Menu';
+    menu.style.color = 'black';
+    menu.style.cursor = 'pointer';
+    menu.style.display = 'none'
+    td[2].append(menu)
     if (window.matchMedia('(max-width: 1600px)').matches) {
         winner.style.fontSize = '60px';
         replay.style.fontSize = '60px';
         replaytwo.style.fontSize = '60px'
+        about.style.fontSize = '60px'
     }
     onePlayer.innerHTML = '1 player';
     onePlayer.style.color = 'black';
@@ -96,6 +110,10 @@ addEventListener('DOMContentLoaded', () => {
         twoPlayer.style.height = '40px'
         twoPlayer.style.margin = '8px';
         twoPlayer.style.marginTop = '8px';
+        menu.style.fontSize = '27px';
+        menu.style.height = '40px'
+        menu.style.margin = '8px';
+        menu.style.marginTop = '8px';
         beginner.style.fontSize = '27px';
         beginner.style.height = '40px'
         beginner.style.margin = '8px';
@@ -117,6 +135,10 @@ addEventListener('DOMContentLoaded', () => {
         twoPlayer.style.height = '50px';
         twoPlayer.style.margin = '10px';
         twoPlayer.style.marginTop = '12px';
+        menu.style.fontSize = '35px';
+        menu.style.height = '50px';
+        menu.style.margin = '10px';
+        menu.style.marginTop = '12px';
         beginner.style.fontSize = '35px';
         beginner.style.height = '50px';
         beginner.style.margin = '10px';
@@ -136,6 +158,7 @@ addEventListener('DOMContentLoaded', () => {
         }
         td[0].append(onePlayer);
         td[1].append(twoPlayer);
+        menu.style.display = 'block'
         onePlayer.onclick = () => {
             onePlayer.style.display = 'none';
             twoPlayer.style.display = 'none';
@@ -151,8 +174,11 @@ addEventListener('DOMContentLoaded', () => {
     twoPlayer.onclick = () => {
         twoStart()
     }
+    menu.onclick = () => {
+        this.location.reload()
+    }
     let win = player => {
-        for (let i = 10; i < 19; i++) {
+        for (let i = 11; i < 20; i++) {
             button[i].disabled = 'true';
         }      
         winner.innerHTML = `${player} player won!`;
@@ -169,7 +195,7 @@ addEventListener('DOMContentLoaded', () => {
         }
     }
     let wintwo = player => {
-        for (let i = 7; i < 16; i++) {
+        for (let i = 8; i < 17; i++) {
             button[i].disabled = 'true';
         }      
         winner.innerHTML = `${player} player won!`;
@@ -254,14 +280,21 @@ addEventListener('DOMContentLoaded', () => {
         volume.style.display = 'block';
         ret.style.display = 'block';
     }
+    button[4].onclick = () =>{
+        for (let i = 0; i < 5; i++) {
+            button[i].style.display = 'none'
+        }
+        menu.style.display = 'block'
+        document.body.append(about)
+    }
     const bStart = () => {
         score1st.style.display = 'block';
         score2nd.style.display = 'block';
         let rand = () => {
-            return Math.floor(Math.random() * 9 + 10);         
+            return Math.floor(Math.random() * 9 + 11);         
         }
         let pos1x = rand();
-        for (let i = 10; i < 19; i++) {
+        for (let i = 11; i < 20; i++) {
             button[i].style.display = 'block';
             button[i].disabled = true;
         }
@@ -278,14 +311,14 @@ addEventListener('DOMContentLoaded', () => {
             if (window.matchMedia('(max-width: 1600px)').matches) {
                 button[pos1x].style.fontSize = '45px';
             }
-            for (let i = 10; i < 19; i++) {
+            for (let i = 11; i < 20; i++) {
                 if (i != pos1x) {
                     button[i].disabled = false
                 }
             }
         }
         setTimeout(first, 1000);
-        for (let pos1o = 10; pos1o < 19; pos1o++) {
+        for (let pos1o = 11; pos1o < 20; pos1o++) {
             button[pos1o].onclick = () => {
                 if (localStorage.getItem('Volume') == 'ON') {
                     oSound.play()
@@ -297,7 +330,7 @@ addEventListener('DOMContentLoaded', () => {
                 if (window.matchMedia('(max-width: 1600px)').matches) {
                     button[pos1o].style.fontSize = '45px';
                 }
-                for (let i = 10; i < 19; i++) {
+                for (let i = 11; i < 20; i++) {
                     button[i].disabled = true
                 }
                 let second = () => {
@@ -315,12 +348,12 @@ addEventListener('DOMContentLoaded', () => {
                     if (window.matchMedia('(max-width: 1600px)').matches) {
                         button[pos2x].style.fontSize = '45px';
                     }
-                    for (let i = 10; i < 19; i++) {
+                    for (let i = 11; i < 20; i++) {
                         if (button[i].innerHTML != 'X' && button[i].innerHTML != 'O') {
                             button[i].disabled = false;
                         }                   
                     }
-                    for (let pos2o = 10; pos2o < 19; pos2o++) {
+                    for (let pos2o = 11; pos2o < 20; pos2o++) {
                         button[pos2o].onclick = () => {
                             if (localStorage.getItem('Volume') == 'ON') {
                                 oSound.play()
@@ -332,7 +365,7 @@ addEventListener('DOMContentLoaded', () => {
                             if (window.matchMedia('(max-width: 1600px)').matches) {
                                 button[pos2o].style.fontSize = '45px';
                             }
-                            for (let i = 10; i < 19; i++) {
+                            for (let i = 11; i < 20; i++) {
                                 button[i].disabled = true;
                             }
                             let third = () => {
@@ -350,36 +383,36 @@ addEventListener('DOMContentLoaded', () => {
                                 if (window.matchMedia('(max-width: 1600px)').matches) {
                                     button[pos3x].style.fontSize = '45px';
                                 }
-                                for (let i = 10; i < 19; i++) {
+                                for (let i = 11; i < 20; i++) {
                                     if (button[i].innerHTML != 'X' && button[i].innerHTML != 'O') {
                                         button[i].disabled = false;
                                     }                   
                                 }
-                                            if (button[10].innerHTML == button[11].innerHTML && button[11].innerHTML == button[12].innerHTML && button[10].innerHTML != '') {
-                                                win('First');
-                                            }
-                                            if (button[10].innerHTML == button[13].innerHTML && button[13].innerHTML == button[16].innerHTML && button[10].innerHTML != '') {
-                                                win('First');
-                                            }
-                                            if (button[10].innerHTML == button[14].innerHTML && button[14].innerHTML == button[18].innerHTML && button[10].innerHTML != '') {
-                                                win('First');
-                                            }
-                                            if (button[12].innerHTML == button[15].innerHTML && button[15].innerHTML == button[18].innerHTML && button[12].innerHTML != '') {
-                                                win('First');
-                                            }
-                                            if (button[12].innerHTML == button[14].innerHTML && button[14].innerHTML == button[16].innerHTML && button[12].innerHTML != '') {
-                                                win('First');
-                                            }
-                                            if (button[13].innerHTML == button[14].innerHTML && button[14].innerHTML == button[15].innerHTML && button[13].innerHTML != '') {
-                                                win('First');
-                                            }
-                                            if (button[16].innerHTML == button[17].innerHTML && button[17].innerHTML == button[18].innerHTML && button[16].innerHTML != '') {
+                                            if (button[11].innerHTML == button[12].innerHTML && button[12].innerHTML == button[13].innerHTML && button[11].innerHTML != '') {
                                                 win('First');
                                             }
                                             if (button[11].innerHTML == button[14].innerHTML && button[14].innerHTML == button[17].innerHTML && button[11].innerHTML != '') {
                                                 win('First');
                                             }
-                                for (let pos3o = 10; pos3o < 19; pos3o++) {
+                                            if (button[11].innerHTML == button[15].innerHTML && button[15].innerHTML == button[19].innerHTML && button[11].innerHTML != '') {
+                                                win('First');
+                                            }
+                                            if (button[13].innerHTML == button[16].innerHTML && button[16].innerHTML == button[19].innerHTML && button[13].innerHTML != '') {
+                                                win('First');
+                                            }
+                                            if (button[13].innerHTML == button[15].innerHTML && button[15].innerHTML == button[17].innerHTML && button[13].innerHTML != '') {
+                                                win('First');
+                                            }
+                                            if (button[14].innerHTML == button[15].innerHTML && button[15].innerHTML == button[16].innerHTML && button[14].innerHTML != '') {
+                                                win('First');
+                                            }
+                                            if (button[17].innerHTML == button[18].innerHTML && button[18].innerHTML == button[19].innerHTML && button[17].innerHTML != '') {
+                                                win('First');
+                                            }
+                                            if (button[12].innerHTML == button[15].innerHTML && button[15].innerHTML == button[18].innerHTML && button[12].innerHTML != '') {
+                                                win('First');
+                                            }
+                                for (let pos3o = 11; pos3o < 20; pos3o++) {
                                     button[pos3o].onclick = () => {
                                         if (localStorage.getItem('Volume') == 'ON') {
                                             oSound.play()
@@ -391,31 +424,31 @@ addEventListener('DOMContentLoaded', () => {
                                         if (window.matchMedia('(max-width: 1600px)').matches) {
                                             button[pos3o].style.fontSize = '45px';
                                         }
-                                        for (let i = 10; i < 19; i++) {
+                                        for (let i = 11; i < 20; i++) {
                                             button[i].disabled = true;
                                         }
-                                        if (button[10].innerHTML == button[11].innerHTML && button[11].innerHTML == button[12].innerHTML && button[10].innerHTML != '') {
-                                            win('Second');
-                                        }
-                                        if (button[10].innerHTML == button[13].innerHTML && button[13].innerHTML == button[16].innerHTML && button[10].innerHTML != '') {
-                                            win('Second');
-                                        }
-                                        if (button[10].innerHTML == button[14].innerHTML && button[14].innerHTML == button[18].innerHTML && button[10].innerHTML != '') {
-                                            win('Second');
-                                        }
-                                        if (button[12].innerHTML == button[15].innerHTML && button[15].innerHTML == button[18].innerHTML && button[12].innerHTML != '') {
-                                            win('Second');
-                                        }
-                                        if (button[12].innerHTML == button[14].innerHTML && button[14].innerHTML == button[16].innerHTML && button[12].innerHTML != '') {
-                                            win('Second');
-                                        }
-                                        if (button[13].innerHTML == button[14].innerHTML && button[14].innerHTML == button[15].innerHTML && button[13].innerHTML != '') {
-                                            win('Second');
-                                        }
-                                        if (button[16].innerHTML == button[17].innerHTML && button[17].innerHTML == button[18].innerHTML && button[16].innerHTML != '') {
+                                        if (button[11].innerHTML == button[12].innerHTML && button[12].innerHTML == button[13].innerHTML && button[11].innerHTML != '') {
                                             win('Second');
                                         }
                                         if (button[11].innerHTML == button[14].innerHTML && button[14].innerHTML == button[17].innerHTML && button[11].innerHTML != '') {
+                                            win('Second');
+                                        }
+                                        if (button[11].innerHTML == button[15].innerHTML && button[15].innerHTML == button[19].innerHTML && button[11].innerHTML != '') {
+                                            win('Second');
+                                        }
+                                        if (button[13].innerHTML == button[16].innerHTML && button[16].innerHTML == button[19].innerHTML && button[13].innerHTML != '') {
+                                            win('Second');
+                                        }
+                                        if (button[13].innerHTML == button[15].innerHTML && button[15].innerHTML == button[17].innerHTML && button[13].innerHTML != '') {
+                                            win('Second');
+                                        }
+                                        if (button[14].innerHTML == button[15].innerHTML && button[15].innerHTML == button[16].innerHTML && button[14].innerHTML != '') {
+                                            win('Second');
+                                        }
+                                        if (button[17].innerHTML == button[18].innerHTML && button[18].innerHTML == button[19].innerHTML && button[17].innerHTML != '') {
+                                            win('Second');
+                                        }
+                                        if (button[12].innerHTML == button[15].innerHTML && button[15].innerHTML == button[18].innerHTML && button[12].innerHTML != '') {
                                             win('Second');
                                         }
                                         let fourth = () => {
@@ -433,36 +466,36 @@ addEventListener('DOMContentLoaded', () => {
                                             if (window.matchMedia('(max-width: 1600px)').matches) {
                                                 button[pos4x].style.fontSize = '45px';
                                             }
-                                            for (let i = 10; i < 19; i++) {
+                                            for (let i = 11; i < 20; i++) {
                                                 if (button[i].innerHTML != 'X' && button[i].innerHTML != 'O') {
                                                     button[i].disabled = false;
                                                 }                   
                                             }
-                                            if (button[10].innerHTML == button[11].innerHTML && button[11].innerHTML == button[12].innerHTML && button[10].innerHTML != '') {
-                                                win('First');
-                                            }
-                                            if (button[10].innerHTML == button[13].innerHTML && button[13].innerHTML == button[16].innerHTML && button[10].innerHTML != '') {
-                                                win('First');
-                                            }
-                                            if (button[10].innerHTML == button[14].innerHTML && button[14].innerHTML == button[18].innerHTML && button[10].innerHTML != '') {
-                                                win('First');
-                                            }
-                                            if (button[12].innerHTML == button[15].innerHTML && button[15].innerHTML == button[18].innerHTML && button[12].innerHTML != '') {
-                                                win('First');
-                                            }
-                                            if (button[12].innerHTML == button[14].innerHTML && button[14].innerHTML == button[16].innerHTML && button[12].innerHTML != '') {
-                                                win('First');
-                                            }
-                                            if (button[13].innerHTML == button[14].innerHTML && button[14].innerHTML == button[15].innerHTML && button[13].innerHTML != '') {
-                                                win('First');
-                                            }
-                                            if (button[16].innerHTML == button[17].innerHTML && button[17].innerHTML == button[18].innerHTML && button[16].innerHTML != '') {
+                                            if (button[11].innerHTML == button[12].innerHTML && button[12].innerHTML == button[13].innerHTML && button[11].innerHTML != '') {
                                                 win('First');
                                             }
                                             if (button[11].innerHTML == button[14].innerHTML && button[14].innerHTML == button[17].innerHTML && button[11].innerHTML != '') {
                                                 win('First');
                                             }
-                                            for (let pos4o = 10; pos4o < 19; pos4o++) {
+                                            if (button[11].innerHTML == button[15].innerHTML && button[15].innerHTML == button[19].innerHTML && button[11].innerHTML != '') {
+                                                win('First');
+                                            }
+                                            if (button[13].innerHTML == button[16].innerHTML && button[16].innerHTML == button[19].innerHTML && button[13].innerHTML != '') {
+                                                win('First');
+                                            }
+                                            if (button[13].innerHTML == button[15].innerHTML && button[15].innerHTML == button[17].innerHTML && button[13].innerHTML != '') {
+                                                win('First');
+                                            }
+                                            if (button[14].innerHTML == button[15].innerHTML && button[15].innerHTML == button[16].innerHTML && button[14].innerHTML != '') {
+                                                win('First');
+                                            }
+                                            if (button[17].innerHTML == button[18].innerHTML && button[18].innerHTML == button[19].innerHTML && button[17].innerHTML != '') {
+                                                win('First');
+                                            }
+                                            if (button[12].innerHTML == button[15].innerHTML && button[15].innerHTML == button[18].innerHTML && button[12].innerHTML != '') {
+                                                win('First');
+                                            }
+                                            for (let pos4o = 11; pos4o < 20; pos4o++) {
                                                 button[pos4o].onclick = () => {
                                                     if (localStorage.getItem('Volume') == 'ON') {
                                                         oSound.play()
@@ -474,31 +507,31 @@ addEventListener('DOMContentLoaded', () => {
                                                     if (window.matchMedia('(max-width: 1600px)').matches) {
                                                         button[pos4o].style.fontSize = '45px';
                                                     }
-                                                    for (let i = 10; i < 19; i++) {
+                                                    for (let i = 11; i < 20; i++) {
                                                         button[i].disabled = true;
                                                     }
-                                                    if (button[10].innerHTML == button[11].innerHTML && button[11].innerHTML == button[12].innerHTML && button[10].innerHTML != '') {
-                                                        win('Second');
-                                                    }
-                                                    if (button[10].innerHTML == button[13].innerHTML && button[13].innerHTML == button[16].innerHTML && button[10].innerHTML != '') {
-                                                        win('Second');
-                                                    }
-                                                    if (button[10].innerHTML == button[14].innerHTML && button[14].innerHTML == button[18].innerHTML && button[10].innerHTML != '') {
-                                                        win('Second');
-                                                    }
-                                                    if (button[12].innerHTML == button[15].innerHTML && button[15].innerHTML == button[18].innerHTML && button[12].innerHTML != '') {
-                                                        win('Second');
-                                                    }
-                                                    if (button[12].innerHTML == button[14].innerHTML && button[14].innerHTML == button[16].innerHTML && button[12].innerHTML != '') {
-                                                        win('Second');
-                                                    }
-                                                    if (button[13].innerHTML == button[14].innerHTML && button[14].innerHTML == button[15].innerHTML && button[13].innerHTML != '') {
-                                                        win('Second');
-                                                    }
-                                                    if (button[16].innerHTML == button[17].innerHTML && button[17].innerHTML == button[18].innerHTML && button[16].innerHTML != '') {
+                                                    if (button[11].innerHTML == button[12].innerHTML && button[12].innerHTML == button[13].innerHTML && button[11].innerHTML != '') {
                                                         win('Second');
                                                     }
                                                     if (button[11].innerHTML == button[14].innerHTML && button[14].innerHTML == button[17].innerHTML && button[11].innerHTML != '') {
+                                                        win('Second');
+                                                    }
+                                                    if (button[11].innerHTML == button[15].innerHTML && button[15].innerHTML == button[19].innerHTML && button[11].innerHTML != '') {
+                                                        win('Second');
+                                                    }
+                                                    if (button[13].innerHTML == button[16].innerHTML && button[16].innerHTML == button[19].innerHTML && button[13].innerHTML != '') {
+                                                        win('Second');
+                                                    }
+                                                    if (button[13].innerHTML == button[15].innerHTML && button[15].innerHTML == button[17].innerHTML && button[13].innerHTML != '') {
+                                                        win('Second');
+                                                    }
+                                                    if (button[14].innerHTML == button[15].innerHTML && button[15].innerHTML == button[16].innerHTML && button[14].innerHTML != '') {
+                                                        win('Second');
+                                                    }
+                                                    if (button[17].innerHTML == button[18].innerHTML && button[18].innerHTML == button[19].innerHTML && button[17].innerHTML != '') {
+                                                        win('Second');
+                                                    }
+                                                    if (button[12].innerHTML == button[15].innerHTML && button[15].innerHTML == button[18].innerHTML && button[12].innerHTML != '') {
                                                         win('Second');
                                                     }
                                                     let fifth = () => {
@@ -516,33 +549,33 @@ addEventListener('DOMContentLoaded', () => {
                                                         if (window.matchMedia('(max-width: 1600px)').matches) {
                                                             button[pos5x].style.fontSize = '45px';
                                                         }
-                                                        for (let i = 10; i < 19; i++) {
+                                                        for (let i = 11; i < 20; i++) {
                                                             if (button[i].innerHTML != 'X' && button[i].innerHTML != 'O') {
                                                                 button[i].disabled = false;
                                                             }                   
                                                         }
-                                                        if (button[10].innerHTML == button[11].innerHTML && button[11].innerHTML == button[12].innerHTML && button[10].innerHTML != '') {
-                                                            win('First');
-                                                        }
-                                                        if (button[10].innerHTML == button[13].innerHTML && button[13].innerHTML == button[16].innerHTML && button[10].innerHTML != '') {
-                                                            win('First');
-                                                        }
-                                                        if (button[10].innerHTML == button[14].innerHTML && button[14].innerHTML == button[18].innerHTML && button[10].innerHTML != '') {
-                                                            win('First');
-                                                        }
-                                                        if (button[12].innerHTML == button[15].innerHTML && button[15].innerHTML == button[18].innerHTML && button[12].innerHTML != '') {
-                                                            win('First');
-                                                        }
-                                                        if (button[12].innerHTML == button[14].innerHTML && button[14].innerHTML == button[16].innerHTML && button[12].innerHTML != '') {
-                                                            win('First');
-                                                        }
-                                                        if (button[13].innerHTML == button[14].innerHTML && button[14].innerHTML == button[15].innerHTML && button[13].innerHTML != '') {
-                                                            win('First');
-                                                        }
-                                                        if (button[16].innerHTML == button[17].innerHTML && button[17].innerHTML == button[18].innerHTML && button[16].innerHTML != '') {
+                                                        if (button[11].innerHTML == button[12].innerHTML && button[12].innerHTML == button[13].innerHTML && button[11].innerHTML != '') {
                                                             win('First');
                                                         }
                                                         if (button[11].innerHTML == button[14].innerHTML && button[14].innerHTML == button[17].innerHTML && button[11].innerHTML != '') {
+                                                            win('First');
+                                                        }
+                                                        if (button[11].innerHTML == button[15].innerHTML && button[15].innerHTML == button[19].innerHTML && button[11].innerHTML != '') {
+                                                            win('First');
+                                                        }
+                                                        if (button[13].innerHTML == button[16].innerHTML && button[16].innerHTML == button[19].innerHTML && button[13].innerHTML != '') {
+                                                            win('First');
+                                                        }
+                                                        if (button[13].innerHTML == button[15].innerHTML && button[15].innerHTML == button[17].innerHTML && button[13].innerHTML != '') {
+                                                            win('First');
+                                                        }
+                                                        if (button[14].innerHTML == button[15].innerHTML && button[15].innerHTML == button[16].innerHTML && button[14].innerHTML != '') {
+                                                            win('First');
+                                                        }
+                                                        if (button[17].innerHTML == button[18].innerHTML && button[18].innerHTML == button[19].innerHTML && button[17].innerHTML != '') {
+                                                            win('First');
+                                                        }
+                                                        if (button[12].innerHTML == button[15].innerHTML && button[15].innerHTML == button[18].innerHTML && button[12].innerHTML != '') {
                                                             win('First');
                                                         }
                                                         if (winner.innerHTML == '') {
@@ -560,7 +593,7 @@ addEventListener('DOMContentLoaded', () => {
                                                             replay.style.fontSize = '80px';
                                                             replay.style.cursor = 'pointer';
                                                             replay.onclick = () => {
-                                                                for (let i = 10; i < 19; i++) {
+                                                                for (let i = 11; i < 20; i++) {
                                                                     button[i].innerHTML = ''
                                                                     button[i].disabled = true
                                                                 }
@@ -599,13 +632,13 @@ addEventListener('DOMContentLoaded', () => {
     }
     const twoStart = () => {
         score1st.style.display = 'block';
-        score2nd.style.display = 'block';
-        for (let i = 7; i < 16; i++) {
+        score2nd.style.display = 'block';   
+        for (let i = 8; i < 17; i++) {
             button[i].style.display = 'block';
         }
-        table[0].style.display = 'none';
+        table[0].style.display = 'none'
         table[1].style.visibility = 'visible';
-        for (let pos1x = 7; pos1x < 16; pos1x++) {
+        for (let pos1x = 8; pos1x < 17; pos1x++) {
             button[pos1x].onclick = () => {
                 if (localStorage.getItem('Volume') == 'ON') {
                     xSound.play()
@@ -618,7 +651,7 @@ addEventListener('DOMContentLoaded', () => {
                     button[pos1x].style.fontSize = '45px';
                 }
                 button[pos1x].disabled = true;
-                for (let pos1o = 7; pos1o < 16; pos1o++) {
+                for (let pos1o = 8; pos1o < 17; pos1o++) {
                     button[pos1o].onclick = () => {
                         if (localStorage.getItem('Volume') == 'ON') {
                             oSound.play()
@@ -631,7 +664,7 @@ addEventListener('DOMContentLoaded', () => {
                             button[pos1o].style.fontSize = '45px';
                         }
                         button[pos1o].disabled = true;
-                        for (let pos2x = 7; pos2x < 16; pos2x++) {
+                        for (let pos2x = 8; pos2x < 17; pos2x++) {
                             button[pos2x].onclick = () => {
                                 if (localStorage.getItem('Volume') == 'ON') {
                                     xSound.play()
@@ -644,7 +677,7 @@ addEventListener('DOMContentLoaded', () => {
                                     button[pos2x].style.fontSize = '45px';
                                 }
                                 button[pos2x].disabled = true;
-                                for (let pos2o = 7; pos2o < 16; pos2o++) {
+                                for (let pos2o = 8; pos2o < 17; pos2o++) {
                                     button[pos2o].onclick = () => {
                                         if (localStorage.getItem('Volume') == 'ON') {
                                             oSound.play()
@@ -657,7 +690,7 @@ addEventListener('DOMContentLoaded', () => {
                                             button[pos2o].style.fontSize = '45px';
                                         }
                                         button[pos2o].disabled = true;
-                                        for (let pos3x = 7; pos3x < 16; pos3x++) {
+                                        for (let pos3x = 8; pos3x < 17; pos3x++) {
                                             button[pos3x].onclick = () => {
                                                 if (localStorage.getItem('Volume') == 'ON') {
                                                     xSound.play()
@@ -670,31 +703,31 @@ addEventListener('DOMContentLoaded', () => {
                                                     button[pos3x].style.fontSize = '45px';
                                                 }
                                                 button[pos3x].disabled = true;
-                                                if (button[7].innerHTML == button[8].innerHTML && button[8].innerHTML == button[9].innerHTML && button[7].innerHTML != '') {
-                                                    wintwo('First');
-                                                }
-                                                if (button[7].innerHTML == button[10].innerHTML && button[10].innerHTML == button[13].innerHTML && button[7].innerHTML != '') {
-                                                    wintwo('First');
-                                                }
-                                                if (button[7].innerHTML == button[11].innerHTML && button[11].innerHTML == button[15].innerHTML && button[7].innerHTML != '') {
-                                                    wintwo('First');
-                                                }
-                                                if (button[9].innerHTML == button[12].innerHTML && button[12].innerHTML == button[15].innerHTML && button[9].innerHTML != '') {
-                                                    wintwo('First');
-                                                }
-                                                if (button[9].innerHTML == button[11].innerHTML && button[11].innerHTML == button[13].innerHTML && button[9].innerHTML != '') {
-                                                    wintwo('First');
-                                                }
-                                                if (button[10].innerHTML == button[11].innerHTML && button[11].innerHTML == button[12].innerHTML && button[10].innerHTML != '') {
-                                                    wintwo('First');
-                                                }
-                                                if (button[13].innerHTML == button[14].innerHTML && button[14].innerHTML == button[15].innerHTML && button[13].innerHTML != '') {
+                                                if (button[8].innerHTML == button[9].innerHTML && button[9].innerHTML == button[10].innerHTML && button[8].innerHTML != '') {
                                                     wintwo('First');
                                                 }
                                                 if (button[8].innerHTML == button[11].innerHTML && button[11].innerHTML == button[14].innerHTML && button[8].innerHTML != '') {
                                                     wintwo('First');
                                                 }
-                                                for (let pos3o = 7; pos3o < 16; pos3o++) {
+                                                if (button[8].innerHTML == button[12].innerHTML && button[12].innerHTML == button[16].innerHTML && button[8].innerHTML != '') {
+                                                    wintwo('First');
+                                                }
+                                                if (button[10].innerHTML == button[13].innerHTML && button[13].innerHTML == button[16].innerHTML && button[10].innerHTML != '') {
+                                                    wintwo('First');
+                                                }
+                                                if (button[10].innerHTML == button[12].innerHTML && button[12].innerHTML == button[14].innerHTML && button[10].innerHTML != '') {
+                                                    wintwo('First');
+                                                }
+                                                if (button[11].innerHTML == button[12].innerHTML && button[12].innerHTML == button[13].innerHTML && button[11].innerHTML != '') {
+                                                    wintwo('First');
+                                                }
+                                                if (button[14].innerHTML == button[15].innerHTML && button[15].innerHTML == button[16].innerHTML && button[14].innerHTML != '') {
+                                                    wintwo('First');
+                                                }
+                                                if (button[9].innerHTML == button[12].innerHTML && button[12].innerHTML == button[15].innerHTML && button[9].innerHTML != '') {
+                                                    wintwo('First');
+                                                }
+                                                for (let pos3o = 8; pos3o < 17; pos3o++) {
                                                     button[pos3o].onclick = () => {
                                                         if (localStorage.getItem('Volume') == 'ON') {
                                                             oSound.play()
@@ -707,31 +740,31 @@ addEventListener('DOMContentLoaded', () => {
                                                             button[pos3o].style.fontSize = '45px';
                                                         }
                                                         button[pos3o].disabled = true;
-                                                        if (button[7].innerHTML == button[8].innerHTML && button[8].innerHTML == button[9].innerHTML && button[7].innerHTML != '') {
-                                                            wintwo('Second');
-                                                        }
-                                                        if (button[7].innerHTML == button[10].innerHTML && button[10].innerHTML == button[13].innerHTML && button[7].innerHTML != '') {
-                                                            wintwo('Second');
-                                                        }
-                                                        if (button[7].innerHTML == button[11].innerHTML && button[11].innerHTML == button[15].innerHTML && button[7].innerHTML != '') {
-                                                            wintwo('Second');
-                                                        }
-                                                        if (button[9].innerHTML == button[12].innerHTML && button[12].innerHTML == button[15].innerHTML && button[9].innerHTML != '') {
-                                                            wintwo('Second');
-                                                        }
-                                                        if (button[9].innerHTML == button[11].innerHTML && button[11].innerHTML == button[13].innerHTML && button[9].innerHTML != '') {
-                                                            wintwo('Second');
-                                                        }
-                                                        if (button[10].innerHTML == button[11].innerHTML && button[11].innerHTML == button[12].innerHTML && button[10].innerHTML != '') {
-                                                            wintwo('Second');
-                                                        }
-                                                        if (button[13].innerHTML == button[14].innerHTML && button[14].innerHTML == button[15].innerHTML && button[13].innerHTML != '') {
+                                                        if (button[8].innerHTML == button[9].innerHTML && button[9].innerHTML == button[10].innerHTML && button[8].innerHTML != '') {
                                                             wintwo('Second');
                                                         }
                                                         if (button[8].innerHTML == button[11].innerHTML && button[11].innerHTML == button[14].innerHTML && button[8].innerHTML != '') {
                                                             wintwo('Second');
                                                         }
-                                                        for (let pos4x = 7; pos4x < 16; pos4x++) {
+                                                        if (button[8].innerHTML == button[12].innerHTML && button[12].innerHTML == button[16].innerHTML && button[8].innerHTML != '') {
+                                                            wintwo('Second');
+                                                        }
+                                                        if (button[10].innerHTML == button[13].innerHTML && button[13].innerHTML == button[16].innerHTML && button[10].innerHTML != '') {
+                                                            wintwo('Second');
+                                                        }
+                                                        if (button[10].innerHTML == button[12].innerHTML && button[12].innerHTML == button[14].innerHTML && button[10].innerHTML != '') {
+                                                            wintwo('Second');
+                                                        }
+                                                        if (button[11].innerHTML == button[12].innerHTML && button[12].innerHTML == button[13].innerHTML && button[11].innerHTML != '') {
+                                                            wintwo('Second');
+                                                        }
+                                                        if (button[14].innerHTML == button[15].innerHTML && button[15].innerHTML == button[16].innerHTML && button[14].innerHTML != '') {
+                                                            wintwo('Second');
+                                                        }
+                                                        if (button[9].innerHTML == button[12].innerHTML && button[12].innerHTML == button[15].innerHTML && button[9].innerHTML != '') {
+                                                            wintwo('Second');
+                                                        }
+                                                        for (let pos4x = 8; pos4x < 17; pos4x++) {
                                                             button[pos4x].onclick = () => {
                                                                 if (localStorage.getItem('Volume') == 'ON') {
                                                                     xSound.play()
@@ -744,31 +777,31 @@ addEventListener('DOMContentLoaded', () => {
                                                                     button[pos4x].style.fontSize = '45px';
                                                                 }
                                                                 button[pos4x].disabled = true;
-                                                                if (button[7].innerHTML == button[8].innerHTML && button[8].innerHTML == button[9].innerHTML && button[7].innerHTML != '') {
-                                                                    wintwo('First');
-                                                                }
-                                                                if (button[7].innerHTML == button[10].innerHTML && button[10].innerHTML == button[13].innerHTML && button[7].innerHTML != '') {
-                                                                    wintwo('First');
-                                                                }
-                                                                if (button[7].innerHTML == button[11].innerHTML && button[11].innerHTML == button[15].innerHTML && button[7].innerHTML != '') {
-                                                                    wintwo('First');
-                                                                }
-                                                                if (button[9].innerHTML == button[12].innerHTML && button[12].innerHTML == button[15].innerHTML && button[9].innerHTML != '') {
-                                                                    wintwo('First');
-                                                                }
-                                                                if (button[9].innerHTML == button[11].innerHTML && button[11].innerHTML == button[13].innerHTML && button[9].innerHTML != '') {
-                                                                    wintwo('First');
-                                                                }
-                                                                if (button[10].innerHTML == button[11].innerHTML && button[11].innerHTML == button[12].innerHTML && button[10].innerHTML != '') {
-                                                                    wintwo('First');
-                                                                }
-                                                                if (button[13].innerHTML == button[14].innerHTML && button[14].innerHTML == button[15].innerHTML && button[13].innerHTML != '') {
+                                                                if (button[8].innerHTML == button[9].innerHTML && button[9].innerHTML == button[10].innerHTML && button[8].innerHTML != '') {
                                                                     wintwo('First');
                                                                 }
                                                                 if (button[8].innerHTML == button[11].innerHTML && button[11].innerHTML == button[14].innerHTML && button[8].innerHTML != '') {
                                                                     wintwo('First');
                                                                 }
-                                                                for (let pos4o = 7; pos4o < 16; pos4o++) {
+                                                                if (button[8].innerHTML == button[12].innerHTML && button[12].innerHTML == button[16].innerHTML && button[8].innerHTML != '') {
+                                                                    wintwo('First');
+                                                                }
+                                                                if (button[10].innerHTML == button[13].innerHTML && button[13].innerHTML == button[16].innerHTML && button[10].innerHTML != '') {
+                                                                    wintwo('First');
+                                                                }
+                                                                if (button[10].innerHTML == button[12].innerHTML && button[12].innerHTML == button[14].innerHTML && button[10].innerHTML != '') {
+                                                                    wintwo('First');
+                                                                }
+                                                                if (button[11].innerHTML == button[12].innerHTML && button[12].innerHTML == button[13].innerHTML && button[11].innerHTML != '') {
+                                                                    wintwo('First');
+                                                                }
+                                                                if (button[14].innerHTML == button[15].innerHTML && button[15].innerHTML == button[16].innerHTML && button[14].innerHTML != '') {
+                                                                    wintwo('First');
+                                                                }
+                                                                if (button[9].innerHTML == button[12].innerHTML && button[12].innerHTML == button[15].innerHTML && button[9].innerHTML != '') {
+                                                                    wintwo('First');
+                                                                }
+                                                                for (let pos4o = 8; pos4o < 17; pos4o++) {
                                                                     button[pos4o].onclick = () => {
                                                                         if (localStorage.getItem('Volume') == 'ON') {
                                                                             oSound.play()
@@ -781,31 +814,31 @@ addEventListener('DOMContentLoaded', () => {
                                                                             button[pos4o].style.fontSize = '45px';
                                                                         }
                                                                         button[pos4o].disabled = true;
-                                                                        if (button[7].innerHTML == button[8].innerHTML && button[8].innerHTML == button[9].innerHTML && button[7].innerHTML != '') {
-                                                                            wintwo('Second');
-                                                                        }
-                                                                        if (button[7].innerHTML == button[10].innerHTML && button[10].innerHTML == button[13].innerHTML && button[7].innerHTML != '') {
-                                                                            wintwo('Second');
-                                                                        }
-                                                                        if (button[7].innerHTML == button[11].innerHTML && button[11].innerHTML == button[15].innerHTML && button[7].innerHTML != '') {
-                                                                            wintwo('Second');
-                                                                        }
-                                                                        if (button[9].innerHTML == button[12].innerHTML && button[12].innerHTML == button[15].innerHTML && button[9].innerHTML != '') {
-                                                                            wintwo('Second');
-                                                                        }
-                                                                        if (button[9].innerHTML == button[11].innerHTML && button[11].innerHTML == button[13].innerHTML && button[9].innerHTML != '') {
-                                                                            wintwo('Second');
-                                                                        }
-                                                                        if (button[10].innerHTML == button[11].innerHTML && button[11].innerHTML == button[12].innerHTML && button[10].innerHTML != '') {
-                                                                            wintwo('Second');
-                                                                        }
-                                                                        if (button[13].innerHTML == button[14].innerHTML && button[14].innerHTML == button[15].innerHTML && button[13].innerHTML != '') {
+                                                                        if (button[8].innerHTML == button[9].innerHTML && button[9].innerHTML == button[10].innerHTML && button[8].innerHTML != '') {
                                                                             wintwo('Second');
                                                                         }
                                                                         if (button[8].innerHTML == button[11].innerHTML && button[11].innerHTML == button[14].innerHTML && button[8].innerHTML != '') {
                                                                             wintwo('Second');
                                                                         }
-                                                                        for (let pos5x = 7; pos5x < 16; pos5x++) {
+                                                                        if (button[8].innerHTML == button[12].innerHTML && button[12].innerHTML == button[16].innerHTML && button[8].innerHTML != '') {
+                                                                            wintwo('Second');
+                                                                        }
+                                                                        if (button[10].innerHTML == button[13].innerHTML && button[13].innerHTML == button[16].innerHTML && button[10].innerHTML != '') {
+                                                                            wintwo('Second');
+                                                                        }
+                                                                        if (button[10].innerHTML == button[12].innerHTML && button[12].innerHTML == button[14].innerHTML && button[10].innerHTML != '') {
+                                                                            wintwo('Second');
+                                                                        }
+                                                                        if (button[11].innerHTML == button[12].innerHTML && button[12].innerHTML == button[13].innerHTML && button[11].innerHTML != '') {
+                                                                            wintwo('Second');
+                                                                        }
+                                                                        if (button[14].innerHTML == button[15].innerHTML && button[15].innerHTML == button[16].innerHTML && button[14].innerHTML != '') {
+                                                                            wintwo('Second');
+                                                                        }
+                                                                        if (button[9].innerHTML == button[12].innerHTML && button[12].innerHTML == button[15].innerHTML && button[9].innerHTML != '') {
+                                                                            wintwo('Second');
+                                                                        }
+                                                                        for (let pos5x = 8; pos5x < 17; pos5x++) {
                                                                             button[pos5x].onclick = () => {
                                                                                 if (localStorage.getItem('Volume') == 'ON') {
                                                                                     xSound.play()
@@ -818,28 +851,28 @@ addEventListener('DOMContentLoaded', () => {
                                                                                     button[pos5x].style.fontSize = '45px';
                                                                                 }
                                                                                 button[pos5x].disabled = true;
-                                                                                if (button[7].innerHTML == button[8].innerHTML && button[8].innerHTML == button[9].innerHTML && button[7].innerHTML != '') {
-                                                                                    wintwo('First');
-                                                                                }
-                                                                                if (button[7].innerHTML == button[10].innerHTML && button[10].innerHTML == button[13].innerHTML && button[7].innerHTML != '') {
-                                                                                    wintwo('First');
-                                                                                }
-                                                                                if (button[7].innerHTML == button[11].innerHTML && button[11].innerHTML == button[15].innerHTML && button[7].innerHTML != '') {
-                                                                                    wintwo('First');
-                                                                                }
-                                                                                if (button[9].innerHTML == button[12].innerHTML && button[12].innerHTML == button[15].innerHTML && button[9].innerHTML != '') {
-                                                                                    wintwo('First');
-                                                                                }
-                                                                                if (button[9].innerHTML == button[11].innerHTML && button[11].innerHTML == button[13].innerHTML && button[9].innerHTML != '') {
-                                                                                    wintwo('First');
-                                                                                }
-                                                                                if (button[10].innerHTML == button[11].innerHTML && button[11].innerHTML == button[12].innerHTML && button[10].innerHTML != '') {
-                                                                                    wintwo('First');
-                                                                                }
-                                                                                if (button[13].innerHTML == button[14].innerHTML && button[14].innerHTML == button[15].innerHTML && button[13].innerHTML != '') {
+                                                                                if (button[8].innerHTML == button[9].innerHTML && button[9].innerHTML == button[10].innerHTML && button[8].innerHTML != '') {
                                                                                     wintwo('First');
                                                                                 }
                                                                                 if (button[8].innerHTML == button[11].innerHTML && button[11].innerHTML == button[14].innerHTML && button[8].innerHTML != '') {
+                                                                                    wintwo('First');
+                                                                                }
+                                                                                if (button[8].innerHTML == button[12].innerHTML && button[12].innerHTML == button[16].innerHTML && button[8].innerHTML != '') {
+                                                                                    wintwo('First');
+                                                                                }
+                                                                                if (button[10].innerHTML == button[13].innerHTML && button[13].innerHTML == button[16].innerHTML && button[10].innerHTML != '') {
+                                                                                    wintwo('First');
+                                                                                }
+                                                                                if (button[10].innerHTML == button[12].innerHTML && button[12].innerHTML == button[14].innerHTML && button[10].innerHTML != '') {
+                                                                                    wintwo('First');
+                                                                                }
+                                                                                if (button[11].innerHTML == button[12].innerHTML && button[12].innerHTML == button[13].innerHTML && button[11].innerHTML != '') {
+                                                                                    wintwo('First');
+                                                                                }
+                                                                                if (button[14].innerHTML == button[15].innerHTML && button[15].innerHTML == button[16].innerHTML && button[14].innerHTML != '') {
+                                                                                    wintwo('First');
+                                                                                }
+                                                                                if (button[9].innerHTML == button[12].innerHTML && button[12].innerHTML == button[15].innerHTML && button[9].innerHTML != '') {
                                                                                     wintwo('First');
                                                                                 }
                                                                                 if (winner.innerHTML == '') {
@@ -857,7 +890,7 @@ addEventListener('DOMContentLoaded', () => {
                                                                                     replaytwo.style.fontSize = '80px';
                                                                                     replaytwo.style.cursor = 'pointer';
                                                                                     replaytwo.onclick = () => {
-                                                                                        for (let i = 7; i < 16; i++) {
+                                                                                        for (let i = 8; i < 17; i++) {
                                                                                             button[i].innerHTML = ''
                                                                                             button[i].disabled = false
                                                                                         }
