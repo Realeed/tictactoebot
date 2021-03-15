@@ -162,6 +162,7 @@ addEventListener('DOMContentLoaded', () => {
         onePlayer.onclick = () => {
             onePlayer.style.display = 'none';
             twoPlayer.style.display = 'none';
+            menu.style.display = 'none';
             td[0].append(beginner);
             td[1].append(medium);
             td[2].append(pro);
